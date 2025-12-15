@@ -1,0 +1,138 @@
+// ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const Welcome());
+}
+
+class Welcome extends StatelessWidget {
+  const Welcome({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(useMaterial3: false),
+      home: Scaffold(
+        body: Container(
+          padding: EdgeInsets.fromLTRB(0, 70, 0, 0),
+          width: double.infinity,
+          child: Center(
+            // heightFactor: 0.7,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: 300,
+
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/OIP.jpeg"),
+                          fit: BoxFit.fill,
+                        ),
+                        color: Colors.grey,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+
+                    SizedBox(height: 10),
+                    Container(
+                      child: Text(
+                        "Last Chance for the best bite",
+
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+
+                      margin: EdgeInsets.only(top: 30),
+                    ),
+                  ],
+                ),
+
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 20, 0, 70),
+                  width: double.infinity,
+                  height: 450,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 147, 24, 24),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(150),
+                      topRight: Radius.circular(150),
+                    ),
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 250,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadiusGeometry.circular(15),
+                              ),
+                              backgroundColor: const Color.fromARGB(
+                                255,
+                                186,
+                                185,
+                                185,
+                              ),
+                            ),
+                            onPressed: () {Navigator.pushNamed(context, "/createAccount");},
+                            label: Text(
+                              "SIGN UP",
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 35),
+
+                        Container(
+                          height: 50,
+                          width: 250,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadiusGeometry.circular(15),
+                              ),
+                              backgroundColor: const Color.fromARGB(
+                                255,
+                                186,
+                                185,
+                                185,
+                              ),
+                            ),
+                            onPressed: () { Navigator.pushNamed(context, "/login");},
+                            label: Text(
+                              "LOG IN",
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        // backgroundColor: Colors.black,
+      ),
+    );
+  }
+}
