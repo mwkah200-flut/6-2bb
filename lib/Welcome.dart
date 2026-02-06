@@ -7,7 +7,7 @@ void main() {
 }
 
 class Welcome extends StatelessWidget {
-  const Welcome({Key? key}) : super(key: key);
+  const Welcome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class Welcome extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 50,
                           width: 250,
                           child: ElevatedButton.icon(
@@ -98,7 +98,7 @@ class Welcome extends StatelessWidget {
                         ),
                         SizedBox(height: 35),
 
-                        Container(
+                        SizedBox(
                           height: 50,
                           width: 250,
                           child: ElevatedButton.icon(

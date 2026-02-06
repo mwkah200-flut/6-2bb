@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/homepage.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class Pin extends StatelessWidget {
 
    final String phonenumber;
-   const Pin({required this.phonenumber});
+   const Pin({super.key, required this.phonenumber});
    
   @override
   Widget build(BuildContext context) {

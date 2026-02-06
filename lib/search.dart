@@ -1,0 +1,300 @@
+// ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers
+
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/homepage.dart';
+
+class Search extends StatelessWidget {
+  const Search({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(useMaterial3: false),
+      home: SafeArea(
+        child: Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              
+              Container(
+                // color: Colors.black12,
+                height: 700.8,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 300,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Search",
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 25,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                size: 22,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 147, 24, 24),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20), 
+                    Container(
+                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Recent searches",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey,
+                              // fontWeight: FontWeight.w700,
+                            ),
+                          ),
+              
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Clear",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: const Color.fromARGB(255, 147, 24, 24),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+              
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.white),
+                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.search, size: 30, color: Colors.grey),
+                      
+                            Text(
+                              "burger",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                // fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                   SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.white),
+                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.search, size: 30, color: Colors.grey),
+                      
+                            Text(
+                              "subway",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                // fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                   SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.white),
+                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.search, size: 30, color: Colors.grey),
+                      
+                            Text(
+                              "sandwich",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                // fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                   SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.white),
+                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.search, size: 30, color: Colors.grey),
+                      
+                            Text(
+                              "pizza",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                // fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                   SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.white),
+                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.search, size: 30, color: Colors.grey),
+                      
+                            Text(
+                              "cake",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                // fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  
+                  ],
+                ),
+              ),
+        
+              //  Bottom navigation bar
+              Container(
+                // height: 74.2,
+                // color: Colors.blue,
+                child: Stack(
+                  children: [
+                    // الشله اللي تحت
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          // padding: EdgeInsets.only(left: 10),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Homepage(),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(Icons.food_bank_outlined, size: 30),
+                              ),
+                              Text(
+                                "Home",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+        
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Homepage(),
+                                  ),
+                                );
+                              },
+                              icon: Icon(Icons.search, size: 30),
+                            ),
+                            Text(
+                              "Search",
+                              style: TextStyle(fontSize: 15, color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.receipt_long, size: 30),
+                            ),
+                            Text(
+                              "Orders",
+                              style: TextStyle(fontSize: 15, color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.person, size: 30),
+                            ),
+                            Text(
+                              "Profile",
+                              style: TextStyle(fontSize: 15, color: Colors.black),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 class Number extends StatelessWidget {
 
   
-   Number({Key? key}) : super(key: key);
+   Number({super.key});
   
   final TextEditingController phoneController = TextEditingController();
  

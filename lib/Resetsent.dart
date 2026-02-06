@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class Resetsent extends StatelessWidget {
-  const Resetsent({Key? key}) : super(key: key);
+  const Resetsent({super.key});
 
   @override
   Widget build(BuildContext context) {

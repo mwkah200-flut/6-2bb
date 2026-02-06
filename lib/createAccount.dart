@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Createaccount extends StatelessWidget {
-  const Createaccount({Key? key}) : super(key: key);
+  const Createaccount({super.key});
 
   @override
   Widget build(BuildContext context) {
