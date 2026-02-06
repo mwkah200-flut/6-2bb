@@ -11,7 +11,7 @@ class Createaccount extends StatelessWidget {
       child: Scaffold(
         body: SafeArea(
           child: Scaffold(
-            appBar: AppBar(centerTitle: true, title: Text("Log in")),
+            appBar: AppBar(centerTitle: true, title: Text("Sign up")),
             body: Container(
               padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
               width: double.infinity,
@@ -156,7 +156,7 @@ class Createaccount extends StatelessWidget {
                                 24,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {Navigator.pushNamed(context, "/number");},
                             label: Text(
                               "Sign up ",
                               style: TextStyle(
