@@ -13,18 +13,18 @@ class Search extends StatelessWidget {
       theme: ThemeData.light(useMaterial3: false),
       home: SafeArea(
         child: Scaffold(
+          backgroundColor: Colors.white,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              
-              Container(
+              SizedBox(
                 // color: Colors.black12,
                 height: 700.8,
                 child: Column(
                   children: [
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 300,
                           child: TextField(
                             decoration: InputDecoration(
@@ -53,7 +53,7 @@ class Search extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20), 
+                    SizedBox(height: 20),
                     Container(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Row(
@@ -67,7 +67,7 @@ class Search extends StatelessWidget {
                               // fontWeight: FontWeight.w700,
                             ),
                           ),
-              
+
                           TextButton(
                             onPressed: () {},
                             child: Text(
@@ -81,19 +81,23 @@ class Search extends StatelessWidget {
                         ],
                       ),
                     ),
-              
+
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.white),
-                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                          backgroundColor: WidgetStateProperty.all(
+                            Colors.white,
+                          ),
+                          shadowColor: WidgetStateProperty.all(
+                            const Color.fromARGB(0, 171, 170, 170),
+                          ),
                         ),
                         onPressed: () {},
                         child: Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
-                      
+
                             Text(
                               "burger",
                               style: TextStyle(
@@ -106,18 +110,22 @@ class Search extends StatelessWidget {
                         ),
                       ),
                     ),
-                   SizedBox(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.white),
-                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                          backgroundColor: WidgetStateProperty.all(
+                            Colors.white,
+                          ),
+                          shadowColor: WidgetStateProperty.all(
+                            const Color.fromARGB(0, 171, 170, 170),
+                          ),
                         ),
                         onPressed: () {},
                         child: Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
-                      
+
                             Text(
                               "subway",
                               style: TextStyle(
@@ -130,18 +138,22 @@ class Search extends StatelessWidget {
                         ),
                       ),
                     ),
-                   SizedBox(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.white),
-                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                          backgroundColor: WidgetStateProperty.all(
+                            Colors.white,
+                          ),
+                          shadowColor: WidgetStateProperty.all(
+                            const Color.fromARGB(0, 171, 170, 170),
+                          ),
                         ),
                         onPressed: () {},
                         child: Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
-                      
+
                             Text(
                               "sandwich",
                               style: TextStyle(
@@ -154,18 +166,22 @@ class Search extends StatelessWidget {
                         ),
                       ),
                     ),
-                   SizedBox(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.white),
-                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                          backgroundColor: WidgetStateProperty.all(
+                            Colors.white,
+                          ),
+                          shadowColor: WidgetStateProperty.all(
+                            const Color.fromARGB(0, 171, 170, 170),
+                          ),
                         ),
                         onPressed: () {},
                         child: Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
-                      
+
                             Text(
                               "pizza",
                               style: TextStyle(
@@ -178,18 +194,22 @@ class Search extends StatelessWidget {
                         ),
                       ),
                     ),
-                   SizedBox(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.white),
-                          shadowColor: MaterialStateProperty.all(const Color.fromARGB(0, 171, 170, 170)),
+                          backgroundColor: WidgetStateProperty.all(
+                            Colors.white,
+                          ),
+                          shadowColor: WidgetStateProperty.all(
+                            const Color.fromARGB(0, 171, 170, 170),
+                          ),
                         ),
                         onPressed: () {},
                         child: Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
-                      
+
                             Text(
                               "cake",
                               style: TextStyle(
@@ -202,23 +222,17 @@ class Search extends StatelessWidget {
                         ),
                       ),
                     ),
-                  
                   ],
                 ),
               ),
-        
-              //  Bottom navigation bar
+
               Container(
-                // height: 74.2,
-                // color: Colors.blue,
                 child: Stack(
                   children: [
-                    // الشله اللي تحت
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          // padding: EdgeInsets.only(left: 10),
                           child: Column(
                             children: [
                               IconButton(
@@ -242,7 +256,7 @@ class Search extends StatelessWidget {
                             ],
                           ),
                         ),
-        
+
                         Column(
                           children: [
                             IconButton(
@@ -254,11 +268,18 @@ class Search extends StatelessWidget {
                                   ),
                                 );
                               },
-                              icon: Icon(Icons.search, size: 30),
+                              icon: Icon(
+                                Icons.search,
+                                size: 30,
+                                color: const Color.fromARGB(255, 147, 24, 24),
+                              ),
                             ),
                             Text(
                               "Search",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: const Color.fromARGB(255, 147, 24, 24),
+                              ),
                             ),
                           ],
                         ),
@@ -270,19 +291,26 @@ class Search extends StatelessWidget {
                             ),
                             Text(
                               "Orders",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                              ),
                             ),
                           ],
                         ),
                         Column(
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {                        Navigator.pushNamed(context, "/Account");
+},
                               icon: Icon(Icons.person, size: 30),
                             ),
                             Text(
                               "Profile",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                              ),
                             ),
                           ],
                         ),

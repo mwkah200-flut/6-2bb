@@ -1,9 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/search.dart';
-
-
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -12,7 +9,7 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         body: MediaQuery.removePadding(
           context: context,
@@ -46,7 +43,7 @@ class Homepage extends StatelessWidget {
                                     "Hello user ... ",
                                     style: TextStyle(fontSize: 25),
                                   ),
-      
+
                                   // SizedBox(height: 4,),
                                   Text(
                                     "Grab your bite ",
@@ -62,10 +59,13 @@ class Homepage extends StatelessWidget {
                                   Image.asset("assets/images/OIP.webp"),
                                   Container(
                                     padding: EdgeInsets.fromLTRB(20, 50, 0, 0),
-      
+
                                     child: IconButton(
                                       onPressed: () {
-                                        Navigator.pushNamed(context, "/resturantname");
+                                        Navigator.pushNamed(
+                                          context,
+                                          "/resturantname",
+                                        );
                                       },
                                       icon: Icon(
                                         Icons.notifications,
@@ -80,7 +80,7 @@ class Homepage extends StatelessWidget {
                           ],
                         ),
                       ),
-      
+
                       Text(
                         "DELIVERY TO",
                         style: TextStyle(
@@ -88,7 +88,7 @@ class Homepage extends StatelessWidget {
                           fontSize: 15,
                         ),
                       ),
-      
+
                       //  "الاكسات و فيلتر"
                       Container(
                         padding: EdgeInsets.only(right: 10),
@@ -97,7 +97,10 @@ class Homepage extends StatelessWidget {
                           children: [
                             Text(
                               "XXXXXXXXXX",
-                              style: TextStyle(fontSize: 20, color: Colors.black),
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
                             ),
                             SizedBox(width: 0),
                             IconButton(
@@ -105,7 +108,7 @@ class Homepage extends StatelessWidget {
                               icon: Icon(Icons.arrow_downward),
                             ),
                             SizedBox(width: 20),
-      
+
                             TextButton(
                               onPressed: () {},
                               child: Text(
@@ -119,9 +122,9 @@ class Homepage extends StatelessWidget {
                           ],
                         ),
                       ),
-      
+
                       SizedBox(height: 50),
-      
+
                       // السيرش
                       Container(
                         margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -141,9 +144,9 @@ class Homepage extends StatelessWidget {
                           ),
                         ),
                       ),
-      
+
                       SizedBox(height: 20),
-      
+
                       //  "كاتيجوري و سي اول"
                       Container(
                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -158,11 +161,9 @@ class Homepage extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-      
-                            TextButton(
-                              onPressed: () {
 
-                              },
+                            TextButton(
+                              onPressed: () {},
                               child: Text(
                                 "see all",
                                 style: TextStyle(
@@ -174,7 +175,7 @@ class Homepage extends StatelessWidget {
                           ],
                         ),
                       ),
-      
+
                       // مربعات الصور
                       Container(
                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -196,9 +197,9 @@ class Homepage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-      
+
                               SizedBox(width: 30),
-      
+
                               Container(
                                 height: 120,
                                 width: 150,
@@ -213,9 +214,9 @@ class Homepage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-      
+
                               SizedBox(width: 30),
-      
+
                               Container(
                                 height: 120,
                                 width: 150,
@@ -234,9 +235,9 @@ class Homepage extends StatelessWidget {
                           ),
                         ),
                       ),
-      
+
                       SizedBox(height: 50),
-      
+
                       // "الاحمر و الرصاصي"
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -244,7 +245,7 @@ class Homepage extends StatelessWidget {
                           Container(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-      
+
                               children: [
                                 Container(
                                   padding: EdgeInsets.only(left: 30),
@@ -256,7 +257,7 @@ class Homepage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-      
+
                                 Text(
                                   "70% off",
                                   style: TextStyle(
@@ -298,9 +299,9 @@ class Homepage extends StatelessWidget {
                           ),
                         ],
                       ),
-      
+
                       SizedBox(height: 50),
-      
+
                       Container(
                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Row(
@@ -314,11 +315,10 @@ class Homepage extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-      
+
                             TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, "/recommended");
-
                               },
                               child: Text(
                                 "see all",
@@ -331,7 +331,7 @@ class Homepage extends StatelessWidget {
                           ],
                         ),
                       ),
-      
+
                       // الاطباق
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -357,14 +357,15 @@ class Homepage extends StatelessWidget {
                                     Positioned(
                                       top: 50,
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Container(
                                             padding: EdgeInsets.all(8),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                          
+
                                               children: [
                                                 Container(
                                                   // padding: EdgeInsets.only(left: 30),
@@ -376,7 +377,7 @@ class Homepage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                          
+
                                                 Text(
                                                   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                                                   style: TextStyle(
@@ -407,7 +408,9 @@ class Homepage extends StatelessWidget {
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(10),
-                                                bottomRight: Radius.circular(10),
+                                                bottomRight: Radius.circular(
+                                                  10,
+                                                ),
                                               ),
                                               color: Color.fromARGB(
                                                 255,
@@ -420,7 +423,7 @@ class Homepage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                          
+
                                     Positioned(
                                       top: 0,
                                       right: 0,
@@ -438,14 +441,16 @@ class Homepage extends StatelessWidget {
                                         height: 130,
                                         decoration: BoxDecoration(
                                           color: Colors.grey,
-                                          borderRadius: BorderRadius.circular(100),
+                                          borderRadius: BorderRadius.circular(
+                                            100,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                          
+
                               SizedBox(width: 10),
                               // تاني طبق
                               SizedBox(
@@ -465,14 +470,15 @@ class Homepage extends StatelessWidget {
                                     Positioned(
                                       top: 50,
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Container(
                                             padding: EdgeInsets.all(8),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                          
+
                                               children: [
                                                 Container(
                                                   // padding: EdgeInsets.only(left: 30),
@@ -484,7 +490,7 @@ class Homepage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                          
+
                                                 Text(
                                                   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                                                   style: TextStyle(
@@ -515,7 +521,9 @@ class Homepage extends StatelessWidget {
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(10),
-                                                bottomRight: Radius.circular(10),
+                                                bottomRight: Radius.circular(
+                                                  10,
+                                                ),
                                               ),
                                               color: Color.fromARGB(
                                                 255,
@@ -528,7 +536,7 @@ class Homepage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                          
+
                                     Positioned(
                                       top: 0,
                                       right: 0,
@@ -546,14 +554,16 @@ class Homepage extends StatelessWidget {
                                         height: 130,
                                         decoration: BoxDecoration(
                                           color: Colors.grey,
-                                          borderRadius: BorderRadius.circular(100),
+                                          borderRadius: BorderRadius.circular(
+                                            100,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                          
+
                               SizedBox(width: 10),
                               //   تالت طبق
                               // متفتحهمش عشان هتتلغبط
@@ -574,14 +584,15 @@ class Homepage extends StatelessWidget {
                                     Positioned(
                                       top: 50,
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Container(
                                             padding: EdgeInsets.all(8),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                          
+
                                               children: [
                                                 Container(
                                                   // padding: EdgeInsets.only(left: 30),
@@ -593,7 +604,7 @@ class Homepage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                          
+
                                                 Text(
                                                   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                                                   style: TextStyle(
@@ -624,7 +635,9 @@ class Homepage extends StatelessWidget {
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(10),
-                                                bottomRight: Radius.circular(10),
+                                                bottomRight: Radius.circular(
+                                                  10,
+                                                ),
                                               ),
                                               color: Color.fromARGB(
                                                 255,
@@ -637,7 +650,7 @@ class Homepage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                          
+
                                     Positioned(
                                       top: 0,
                                       right: 0,
@@ -655,7 +668,9 @@ class Homepage extends StatelessWidget {
                                         height: 130,
                                         decoration: BoxDecoration(
                                           color: Colors.grey,
-                                          borderRadius: BorderRadius.circular(100),
+                                          borderRadius: BorderRadius.circular(
+                                            100,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -666,80 +681,87 @@ class Homepage extends StatelessWidget {
                           ),
                         ),
                       ),
-      
+
                       SizedBox(height: 250),
                     ],
                   ),
                 ),
               ),
-                //  Bottom navigation bar
               Container(
                 // color: Colors.yellow,
                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                Container(
-                  // padding: EdgeInsets.only(left: 10),
-                  child: Column(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                      
-                            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Homepage()),); 
-                           
-                        },
-                        icon: Icon(Icons.food_bank_outlined, size: 30),
-                      ),
-                      Text(
-                        "Home",
-                        style: TextStyle(fontSize: 15, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                      
-                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    IconButton(
-                      onPressed: () {
-                          Navigator.pushNamed(context, "/search");
-                      
-                      },
-                      icon: Icon(Icons.search, size: 30),
-                    ),
-                    Text(
-                      "Search",
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.receipt_long, size: 30),
-                    ),
-                    Text(
-                      "Orders",
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.person, size: 30),
-                    ),
-                    Text(
-                      "Profile",
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                  ],
-                ),
-                                  ],
+                    Container(
+                      // padding: EdgeInsets.only(left: 10),
+                      child: Column(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Homepage(),
                                 ),
-              ),    
+                              );
+                            },
+                            icon: Icon(
+                              Icons.food_bank_outlined,
+                              size: 30,
+                              color: const Color.fromARGB(255, 147, 24, 24),
+                            ),
+                          ),
+                          Text(
+                            "Home",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: const Color.fromARGB(255, 147, 24, 24),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/search");
+                          },
+                          icon: Icon(Icons.search, size: 30),
+                        ),
+                        Text(
+                          "Search",
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.receipt_long, size: 30),
+                        ),
+                        Text(
+                          "Orders",
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/Account");
+                          },
+                          icon: Icon(Icons.person, size: 30),
+                        ),
+                        Text("Profile", style: TextStyle(fontSize: 15)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

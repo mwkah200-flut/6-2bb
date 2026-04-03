@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/homepage.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Recommended extends StatelessWidget {
-  Recommended({super.key});
+  const Recommended({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class Recommended extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // العمود اللي بيحتوي كل حاجة
-            Container(
+            SizedBox(
               height: 710,
               child: SingleChildScrollView(
                 child: Column(
@@ -114,6 +113,10 @@ class Recommended extends StatelessWidget {
                             ),
                           ),
                         ),
+                        
+                        
+                        
+                        
                         InkWell(
                           onTap: () {
                             // هنا تحط اللي انت عايزه يحصل
@@ -667,6 +670,8 @@ class Recommended extends StatelessWidget {
                         ),
                       ],
                     ),
+                    
+                  
                   ],
                 ),
               ),

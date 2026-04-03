@@ -2,20 +2,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class AddToOrder extends StatefulWidget {
-  const AddToOrder({super.key});
+class AddCard extends StatefulWidget {
+  const AddCard({super.key});
 
   @override
-  State<AddToOrder> createState() => _AddToOrderState();
+  State<AddCard> createState() => _AddToOrderState();
 }
 
-class _AddToOrderState extends State<AddToOrder> {
+class _AddToOrderState extends State<AddCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       backgroundColor: Colors.white,
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +59,7 @@ class _AddToOrderState extends State<AddToOrder> {
                     ),
                   ),
                   SizedBox(width: 10),
-                  Container(
+                  SizedBox(
                     width: 240,
                     child: TextField(
                       keyboardType: TextInputType.number,
@@ -75,7 +75,7 @@ class _AddToOrderState extends State<AddToOrder> {
             SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +141,7 @@ class _AddToOrderState extends State<AddToOrder> {
                     backgroundColor: const Color.fromARGB(255, 147, 24, 24),
                   ),
                   onPressed: () {
-                    // Navigator.pushNamed(context, "/login");
+                    Navigator.pushNamed(context, "/mcdonalds");
                   },
                   label: Text(
                     "Add card",

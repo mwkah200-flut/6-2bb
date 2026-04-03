@@ -256,7 +256,7 @@ class _ItemnameState extends State<Itemname> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "/addtoorder");
+                    Navigator.pushNamed(context, "/yourorders");
                   },
                   child: Text(
                     "Add TO ORDER (\$${totalPrice.toStringAsFixed(2)})",
