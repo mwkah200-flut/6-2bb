@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pin.dart';
+import 'package:flutter_application_1/screens/pin.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Number extends StatelessWidget {

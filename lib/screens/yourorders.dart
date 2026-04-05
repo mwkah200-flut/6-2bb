@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 
 class yourorders extends StatelessWidget {
+  const yourorders({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -109,7 +111,7 @@ class yourorders extends StatelessWidget {
             SizedBox(height: 5),
             Divider(),
             SizedBox(height: 30),
-            Container(
+            SizedBox(
               height: 40,
               width: 400,
               child: ElevatedButton.icon(

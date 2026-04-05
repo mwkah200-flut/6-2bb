@@ -1,7 +1,7 @@
 // ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/homepage.dart';
+import 'package:flutter_application_1/screens/homepage.dart';
 
 class Search extends StatelessWidget {
   const Search({super.key});

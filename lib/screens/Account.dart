@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/homepage.dart';
+import 'package:flutter_application_1/screens/homepage.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -48,15 +48,25 @@ class _AccountState extends State<Account> {
 
                       SizedBox(height: 20),
 
-                      _row(
-                        Icons.person,
-                        "Profile information",
-                        "Change your account information",
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/profileinfo");
+                        },
+                        child: _row(
+                          Icons.person,
+                          "Profile information",
+                          "Change your account information",
+                        ),
                       ),
-                      _row(
-                        Icons.lock,
-                        "Change password",
-                        "change your password",
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/changepassword");
+                        },
+                        child: _row(
+                          Icons.lock,
+                          "Change password",
+                          "change your password",
+                        ),
                       ),
                       _row(
                         Icons.payment,
@@ -91,7 +101,6 @@ class _AccountState extends State<Account> {
 
                       SizedBox(height: 15),
 
-                      // 👇 كل واحد مستقل
                       _row2(
                         "Push Notification",
                         "For daily update you will get it",

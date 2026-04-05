@@ -1,15 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/homepage.dart';
+import 'package:flutter_application_1/screens/homepage.dart';
 
 class Recommended extends StatelessWidget {
   const Recommended({super.key});
 
   @override
   Widget build(BuildContext context) {
-    int count1 = 1;
-    int count2 = 1;
-    String? selectedAddon;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(centerTitle: true, title: Text("Recommended")),

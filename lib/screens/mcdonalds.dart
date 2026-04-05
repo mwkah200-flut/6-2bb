@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 
 class Mcdonalds extends StatelessWidget {
+  const Mcdonalds({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +33,7 @@ class Mcdonalds extends StatelessWidget {
               "cookies and red velvet",
             ),
             Divider(),
-            Container(
+            SizedBox(
               width: 400,
               height: 300,
               // color: Colors.blue,
@@ -55,7 +57,7 @@ class Mcdonalds extends StatelessWidget {
                       width: 100,
                       height: 100,
                       decoration: const BoxDecoration(
-                        color: const Color.fromARGB(255, 147, 24, 24),
+                        color: Color.fromARGB(255, 147, 24, 24),
                         shape: BoxShape.circle,
                       ),
                       child: Center(
@@ -95,7 +97,11 @@ class Mcdonalds extends StatelessWidget {
                   Align(
                     alignment: const Alignment(0.0, 1.03),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+
+                    Navigator.pushNamed(context, "/homepage");
+
+                      },
                       child: Text(
                         'Keep browsing',
                         style: TextStyle(
