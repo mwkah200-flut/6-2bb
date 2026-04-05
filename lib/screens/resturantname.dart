@@ -45,13 +45,13 @@ class _ResturantPageState extends State<ResturantPage> {
                 ),
         
                 /// Restaurant Name
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 20),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10, top: 20),
                   child: SizedBox(
                     height: 40,
                     child: Text(
                       'Resturant name xxx',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),
@@ -156,7 +156,7 @@ class _ResturantPageState extends State<ResturantPage> {
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 147, 24, 24),
+            color: const Color.fromARGB(255, 147, 24, 24),
             borderRadius: BorderRadius.circular(18),
           ),
         ),
@@ -218,7 +218,7 @@ class _ResturantPageState extends State<ResturantPage> {
                       children: [
                         Container(
                            
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage("https://cdn.britannica.com/08/177308-050-94D9D6BE/Food-Pizza-Basil-Tomato.jpg"),
                           fit: BoxFit.fill,
@@ -234,10 +234,10 @@ class _ResturantPageState extends State<ResturantPage> {
                           // ),
                         ),
                         const SizedBox(width: 20),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Item name'),
                               SizedBox(height: 5),
                               Text('xxxxxxxxxxxxx'),
@@ -253,7 +253,7 @@ class _ResturantPageState extends State<ResturantPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 InkWell(
                   onTap: () {
                     // Any action you want here
@@ -267,15 +267,15 @@ class _ResturantPageState extends State<ResturantPage> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 147, 24, 24),
+                            color: const Color.fromARGB(255, 147, 24, 24),
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
                         const SizedBox(width: 20),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Item name'),
                               SizedBox(height: 5),
                               Text('xxxxxxxxxxxxx'),
@@ -291,7 +291,7 @@ class _ResturantPageState extends State<ResturantPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
         
                 InkWell(
                   onTap: () {
@@ -305,15 +305,15 @@ class _ResturantPageState extends State<ResturantPage> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 147, 24, 24),
+                            color: const Color.fromARGB(255, 147, 24, 24),
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
                         const SizedBox(width: 20),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Item name'),
                               SizedBox(height: 5),
                               Text('xxxxxxxxxxxxx'),
@@ -330,7 +330,7 @@ class _ResturantPageState extends State<ResturantPage> {
                   ),
                 ),
                
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
         
                 InkWell(
                   onTap: () {
@@ -344,15 +344,15 @@ class _ResturantPageState extends State<ResturantPage> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 147, 24, 24),
+                            color: const Color.fromARGB(255, 147, 24, 24),
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
                         const SizedBox(width: 20),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Item name'),
                               SizedBox(height: 5),
                               Text('xxxxxxxxxxxxx'),
@@ -368,7 +368,7 @@ class _ResturantPageState extends State<ResturantPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
         
                 InkWell(
                   
@@ -383,15 +383,15 @@ class _ResturantPageState extends State<ResturantPage> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 147, 24, 24),
+                            color: const Color.fromARGB(255, 147, 24, 24),
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
                         const SizedBox(width: 20),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Item name'),
                               SizedBox(height: 5),
                               Text('xxxxxxxxxxxxx'),
@@ -428,15 +428,15 @@ class _ResturantPageState extends State<ResturantPage> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 147, 24, 24),
+                            color: const Color.fromARGB(255, 147, 24, 24),
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
                         const SizedBox(width: 20),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Item name'),
                               SizedBox(height: 5),
                               Text('xxxxxxxxxxxxx'),
@@ -452,7 +452,7 @@ class _ResturantPageState extends State<ResturantPage> {
                     ),
                   ),
                 ),
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
         
                 InkWell(
                   onTap: () {
@@ -466,15 +466,15 @@ class _ResturantPageState extends State<ResturantPage> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 147, 24, 24),
+                            color: const Color.fromARGB(255, 147, 24, 24),
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
                         const SizedBox(width: 20),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Item name'),
                               SizedBox(height: 5),
                               Text('xxxxxxxxxxxxx'),
@@ -490,7 +490,7 @@ class _ResturantPageState extends State<ResturantPage> {
                     ),
                   ),
                 ),
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
         
                 InkWell(
                   onTap: () {
@@ -504,15 +504,15 @@ class _ResturantPageState extends State<ResturantPage> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 147, 24, 24),
+                            color: const Color.fromARGB(255, 147, 24, 24),
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
                         const SizedBox(width: 20),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Item name'),
                               SizedBox(height: 5),
                               Text('xxxxxxxxxxxxx'),
@@ -530,7 +530,7 @@ class _ResturantPageState extends State<ResturantPage> {
                 ),
                
         
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
               ],
             ),
           ),

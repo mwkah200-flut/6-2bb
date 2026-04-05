@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 
 class Profileinfo extends StatefulWidget {
+  const Profileinfo({super.key});
+
   @override
   State<Profileinfo> createState() => _ProfileinfoState();
 }
@@ -108,6 +110,28 @@ class _ProfileinfoState extends State<Profileinfo> {
                         ],
                       ),
                       Divider(),
+                      SizedBox(height: 60,),
+
+                      Container(
+                    padding: EdgeInsets.only(right: 10),
+                    height: 40,
+                    width: 400,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(15),
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 147, 24, 24),
+                      ),
+                      onPressed: () {},
+
+                      label: Text(
+                        "Change Password" ,
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                
                     ],
                   ),
                 ],

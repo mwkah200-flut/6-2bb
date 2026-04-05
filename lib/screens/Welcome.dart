@@ -16,7 +16,7 @@ class Welcome extends StatelessWidget {
       theme: ThemeData.light(useMaterial3: false),
       home: Scaffold(
         body: Container(
-          padding: EdgeInsets.fromLTRB(0, 70, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
           width: double.infinity,
           child: Center(
             // heightFactor: 0.7,
@@ -29,7 +29,7 @@ class Welcome extends StatelessWidget {
                     Container(
                       height: 300,
 
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage("assets/images/OIP.jpeg"),
                           fit: BoxFit.fill,
@@ -39,9 +39,9 @@ class Welcome extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
-                      child: Text(
+                      child: const Text(
                         "Last Chance for the best bite",
 
                         style: TextStyle(
@@ -51,17 +51,17 @@ class Welcome extends StatelessWidget {
                         ),
                       ),
 
-                      margin: EdgeInsets.only(top: 30),
+                      margin: const EdgeInsets.only(top: 30),
                     ),
                   ],
                 ),
 
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 20, 0, 70),
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 70),
                   width: double.infinity,
                   height: 450,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 147, 24, 24),
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 147, 24, 24),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(150),
                       topRight: Radius.circular(150),
@@ -87,7 +87,7 @@ class Welcome extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {Navigator.pushNamed(context, "/createAccount");},
-                            label: Text(
+                            label: const Text(
                               "SIGN UP",
                               style: TextStyle(
                                 fontSize: 30,
@@ -96,7 +96,7 @@ class Welcome extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 35),
+                        const SizedBox(height: 35),
 
                         SizedBox(
                           height: 50,
@@ -114,7 +114,7 @@ class Welcome extends StatelessWidget {
                               ),
                             ),
                             onPressed: () { Navigator.pushNamed(context, "/login");},
-                            label: Text(
+                            label: const Text(
                               "LOG IN",
                               style: TextStyle(
                                 fontSize: 30,

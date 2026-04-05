@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 
 class Changepssword extends StatefulWidget {
+  const Changepssword({super.key});
+
   @override
   State<Changepssword> createState() => _ChangepsswordState();
 }
@@ -10,7 +12,7 @@ class Changepssword extends StatefulWidget {
 class _ChangepsswordState extends State<Changepssword> {
   @override
   Widget build(BuildContext context) {
-    bool _isPasswordObscure = true;
+    bool isPasswordObscure = true;
 
     return SafeArea(
       child: Scaffold(
@@ -53,27 +55,25 @@ class _ChangepsswordState extends State<Changepssword> {
                         ),
                         width: double.infinity,
                         child: TextField(
-                          obscureText: _isPasswordObscure,
+                          obscureText: isPasswordObscure,
                           decoration: InputDecoration(
                             suffix: IconButton(
                               icon: Icon(Icons.visibility, color: Colors.grey),
                               onPressed: () {
                                 setState(() {
-                                  _isPasswordObscure = !_isPasswordObscure;
+                                  isPasswordObscure = !isPasswordObscure;
                                 });
                               },
                             ),
-                           
+
                             // hintText: "Password",
                             // hintStyle: TextStyle(color: Colors.grey),
                           ),
                         ),
                       ),
-
                     ],
                   ),
-                
-                
+
                   SizedBox(height: 30),
 
                   Column(
@@ -89,29 +89,48 @@ class _ChangepsswordState extends State<Changepssword> {
                         ),
                         width: double.infinity,
                         child: TextField(
-                          obscureText: _isPasswordObscure,
+                          obscureText: isPasswordObscure,
                           decoration: InputDecoration(
                             suffix: IconButton(
                               icon: Icon(Icons.visibility, color: Colors.grey),
                               onPressed: () {
                                 setState(() {
-                                  _isPasswordObscure = !_isPasswordObscure;
+                                  isPasswordObscure = !isPasswordObscure;
                                 });
                               },
                             ),
-                           
+
                             // hintText: "Password",
                             // hintStyle: TextStyle(color: Colors.grey),
                           ),
                         ),
                       ),
-
                     ],
                   ),
-                
-                  SizedBox(height: 30),
 
-                 ],
+                  SizedBox(height: 60),
+
+                  Container(
+                    padding: EdgeInsets.only(right: 10),
+                    height: 40,
+                    width: 400,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(15),
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 147, 24, 24),
+                      ),
+                      onPressed: () {},
+
+                      label: Text(
+                        "Change Password" ,
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                
+                ],
               ),
             ),
           ),

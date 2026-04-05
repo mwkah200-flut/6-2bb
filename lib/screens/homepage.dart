@@ -33,8 +33,8 @@ class Homepage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              padding: EdgeInsets.fromLTRB(10, 35, 0, 0),
-                              child: Column(
+                              padding: const EdgeInsets.fromLTRB(10, 35, 0, 0),
+                              child: const Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(height: 10),
@@ -58,7 +58,7 @@ class Homepage extends StatelessWidget {
                                 children: [
                                   Image.asset("assets/images/OIP.webp"),
                                   Container(
-                                    padding: EdgeInsets.fromLTRB(20, 50, 0, 0),
+                                    padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
 
                                     child: IconButton(
                                       onPressed: () {
@@ -67,7 +67,7 @@ class Homepage extends StatelessWidget {
                                           "/resturantname",
                                         );
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.notifications,
                                         size: 40,
                                         color: Colors.white,
@@ -81,37 +81,37 @@ class Homepage extends StatelessWidget {
                         ),
                       ),
 
-                      Text(
+                      const Text(
                         "DELIVERY TO",
                         style: TextStyle(
-                          color: const Color.fromARGB(255, 147, 24, 24),
+                          color: Color.fromARGB(255, 147, 24, 24),
                           fontSize: 15,
                         ),
                       ),
 
                       //  "الاكسات و فيلتر"
                       Container(
-                        padding: EdgeInsets.only(right: 10),
+                        padding: const EdgeInsets.only(right: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text(
+                            const Text(
                               "XXXXXXXXXX",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                               ),
                             ),
-                            SizedBox(width: 0),
+                            const SizedBox(width: 0),
                             IconButton(
                               onPressed: () {},
-                              icon: Icon(Icons.arrow_downward),
+                              icon: const Icon(Icons.arrow_downward),
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
 
                             TextButton(
                               onPressed: () {},
-                              child: Text(
+                              child: const Text(
                                 "Filter",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -123,17 +123,17 @@ class Homepage extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
 
                       // السيرش
                       Container(
-                        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        padding: EdgeInsets.fromLTRB(130, 0, 130, 0),
+                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        padding: const EdgeInsets.fromLTRB(130, 0, 130, 0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: const Color.fromARGB(172, 158, 158, 158),
                         ),
-                        child: TextField(
+                        child: const TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Search bar",
@@ -145,15 +145,15 @@ class Homepage extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       //  "كاتيجوري و سي اول"
                       Container(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               "Categories",
                               style: TextStyle(
                                 fontSize: 20,
@@ -164,11 +164,11 @@ class Homepage extends StatelessWidget {
 
                             TextButton(
                               onPressed: () {},
-                              child: Text(
+                              child: const Text(
                                 "see all",
                                 style: TextStyle(
                                   fontSize: 18,
-                                  color: const Color.fromARGB(255, 147, 24, 24),
+                                  color: Color.fromARGB(255, 147, 24, 24),
                                 ),
                               ),
                             ),
@@ -178,7 +178,7 @@ class Homepage extends StatelessWidget {
 
                       // مربعات الصور
                       Container(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -188,9 +188,9 @@ class Homepage extends StatelessWidget {
                                 width: 150,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Color.fromARGB(172, 158, 158, 158),
+                                  color: const Color.fromARGB(172, 158, 158, 158),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "Cat. Pic.",
                                     style: TextStyle(fontSize: 18),
@@ -198,16 +198,16 @@ class Homepage extends StatelessWidget {
                                 ),
                               ),
 
-                              SizedBox(width: 30),
+                              const SizedBox(width: 30),
 
                               Container(
                                 height: 120,
                                 width: 150,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Color.fromARGB(172, 158, 158, 158),
+                                  color: const Color.fromARGB(172, 158, 158, 158),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "Cat. Pic.",
                                     style: TextStyle(fontSize: 18),
@@ -215,16 +215,16 @@ class Homepage extends StatelessWidget {
                                 ),
                               ),
 
-                              SizedBox(width: 30),
+                              const SizedBox(width: 30),
 
                               Container(
                                 height: 120,
                                 width: 150,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Color.fromARGB(172, 158, 158, 158),
+                                  color: const Color.fromARGB(172, 158, 158, 158),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "Cat. Pic.",
                                     style: TextStyle(fontSize: 18),
@@ -236,7 +236,7 @@ class Homepage extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
 
                       // "الاحمر و الرصاصي"
                       Row(
@@ -248,8 +248,8 @@ class Homepage extends StatelessWidget {
 
                               children: [
                                 Container(
-                                  padding: EdgeInsets.only(left: 30),
-                                  child: Text(
+                                  padding: const EdgeInsets.only(left: 30),
+                                  child: const Text(
                                     "Experience our delecious dish",
                                     style: TextStyle(
                                       fontSize: 18,
@@ -258,7 +258,7 @@ class Homepage extends StatelessWidget {
                                   ),
                                 ),
 
-                                Text(
+                                const Text(
                                   "70% off",
                                   style: TextStyle(
                                     fontSize: 25,
@@ -269,7 +269,7 @@ class Homepage extends StatelessWidget {
                             ),
                             width: 190,
                             height: 150,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 bottomLeft: Radius.circular(10),
@@ -278,18 +278,18 @@ class Homepage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "OFFER PIC ",
                                 style: TextStyle(
                                   fontSize: 30,
-                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                  color: Color.fromARGB(255, 0, 0, 0),
                                 ),
                               ),
                             ),
                             width: 190,
                             height: 150,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(10),
                                 bottomRight: Radius.circular(10),
@@ -300,14 +300,14 @@ class Homepage extends StatelessWidget {
                         ],
                       ),
 
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
 
                       Container(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               "Recommend",
                               style: TextStyle(
                                 fontSize: 20,
@@ -320,11 +320,11 @@ class Homepage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.pushNamed(context, "/recommended");
                               },
-                              child: Text(
+                              child: const Text(
                                 "see all",
                                 style: TextStyle(
                                   fontSize: 18,
-                                  color: const Color.fromARGB(255, 147, 24, 24),
+                                  color: Color.fromARGB(255, 147, 24, 24),
                                 ),
                               ),
                             ),
@@ -336,7 +336,7 @@ class Homepage extends StatelessWidget {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Container(
-                          padding: EdgeInsets.only(left: 10),
+                          padding: const EdgeInsets.only(left: 10),
                           child: Row(
                             children: [
                               //  اول طبق
@@ -361,7 +361,7 @@ class Homepage extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Container(
-                                            padding: EdgeInsets.all(8),
+                                            padding: const EdgeInsets.all(8),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -369,7 +369,7 @@ class Homepage extends StatelessWidget {
                                               children: [
                                                 Container(
                                                   // padding: EdgeInsets.only(left: 30),
-                                                  child: Text(
+                                                  child: const Text(
                                                     "dish name ",
                                                     style: TextStyle(
                                                       fontSize: 18,
@@ -378,7 +378,7 @@ class Homepage extends StatelessWidget {
                                                   ),
                                                 ),
 
-                                                Text(
+                                                const Text(
                                                   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                                                   style: TextStyle(
                                                     fontSize: 18,
@@ -389,7 +389,7 @@ class Homepage extends StatelessWidget {
                                             ),
                                             width: 150,
                                             height: 150,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(10),
                                                 bottomLeft: Radius.circular(10),
@@ -405,7 +405,7 @@ class Homepage extends StatelessWidget {
                                           Container(
                                             width: 160,
                                             height: 150,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(10),
                                                 bottomRight: Radius.circular(
@@ -428,7 +428,7 @@ class Homepage extends StatelessWidget {
                                       top: 0,
                                       right: 0,
                                       child: Container(
-                                        child: Center(
+                                        child: const Center(
                                           child: Text(
                                             "dish pic ",
                                             style: TextStyle(
@@ -451,7 +451,7 @@ class Homepage extends StatelessWidget {
                                 ),
                               ),
 
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               // تاني طبق
                               SizedBox(
                                 height: 230,
@@ -474,7 +474,7 @@ class Homepage extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Container(
-                                            padding: EdgeInsets.all(8),
+                                            padding: const EdgeInsets.all(8),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -482,7 +482,7 @@ class Homepage extends StatelessWidget {
                                               children: [
                                                 Container(
                                                   // padding: EdgeInsets.only(left: 30),
-                                                  child: Text(
+                                                  child: const Text(
                                                     "dish name ",
                                                     style: TextStyle(
                                                       fontSize: 18,
@@ -491,7 +491,7 @@ class Homepage extends StatelessWidget {
                                                   ),
                                                 ),
 
-                                                Text(
+                                                const Text(
                                                   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                                                   style: TextStyle(
                                                     fontSize: 18,
@@ -502,7 +502,7 @@ class Homepage extends StatelessWidget {
                                             ),
                                             width: 150,
                                             height: 150,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(10),
                                                 bottomLeft: Radius.circular(10),
@@ -518,7 +518,7 @@ class Homepage extends StatelessWidget {
                                           Container(
                                             width: 160,
                                             height: 150,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(10),
                                                 bottomRight: Radius.circular(
@@ -541,7 +541,7 @@ class Homepage extends StatelessWidget {
                                       top: 0,
                                       right: 0,
                                       child: Container(
-                                        child: Center(
+                                        child: const Center(
                                           child: Text(
                                             "dish pic ",
                                             style: TextStyle(
@@ -564,7 +564,7 @@ class Homepage extends StatelessWidget {
                                 ),
                               ),
 
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               //   تالت طبق
                               // متفتحهمش عشان هتتلغبط
                               SizedBox(
@@ -588,7 +588,7 @@ class Homepage extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Container(
-                                            padding: EdgeInsets.all(8),
+                                            padding: const EdgeInsets.all(8),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -596,7 +596,7 @@ class Homepage extends StatelessWidget {
                                               children: [
                                                 Container(
                                                   // padding: EdgeInsets.only(left: 30),
-                                                  child: Text(
+                                                  child: const Text(
                                                     "dish name ",
                                                     style: TextStyle(
                                                       fontSize: 18,
@@ -605,7 +605,7 @@ class Homepage extends StatelessWidget {
                                                   ),
                                                 ),
 
-                                                Text(
+                                                const Text(
                                                   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                                                   style: TextStyle(
                                                     fontSize: 18,
@@ -616,7 +616,7 @@ class Homepage extends StatelessWidget {
                                             ),
                                             width: 150,
                                             height: 150,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(10),
                                                 bottomLeft: Radius.circular(10),
@@ -632,7 +632,7 @@ class Homepage extends StatelessWidget {
                                           Container(
                                             width: 160,
                                             height: 150,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(10),
                                                 bottomRight: Radius.circular(
@@ -655,7 +655,7 @@ class Homepage extends StatelessWidget {
                                       top: 0,
                                       right: 0,
                                       child: Container(
-                                        child: Center(
+                                        child: const Center(
                                           child: Text(
                                             "dish pic ",
                                             style: TextStyle(
@@ -682,7 +682,7 @@ class Homepage extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(height: 250),
+                      const SizedBox(height: 250),
                     ],
                   ),
                 ),
@@ -701,21 +701,21 @@ class Homepage extends StatelessWidget {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Homepage(),
+                                  builder: (context) => const Homepage(),
                                 ),
                               );
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.food_bank_outlined,
                               size: 30,
-                              color: const Color.fromARGB(255, 147, 24, 24),
+                              color: Color.fromARGB(255, 147, 24, 24),
                             ),
                           ),
-                          Text(
+                          const Text(
                             "Home",
                             style: TextStyle(
                               fontSize: 15,
-                              color: const Color.fromARGB(255, 147, 24, 24),
+                              color: Color.fromARGB(255, 147, 24, 24),
                             ),
                           ),
                         ],
@@ -728,9 +728,9 @@ class Homepage extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(context, "/search");
                           },
-                          icon: Icon(Icons.search, size: 30),
+                          icon: const Icon(Icons.search, size: 30),
                         ),
-                        Text(
+                        const Text(
                           "Search",
                           style: TextStyle(fontSize: 15, color: Colors.black),
                         ),
@@ -740,9 +740,9 @@ class Homepage extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.receipt_long, size: 30),
+                          icon: const Icon(Icons.receipt_long, size: 30),
                         ),
-                        Text(
+                        const Text(
                           "Orders",
                           style: TextStyle(fontSize: 15, color: Colors.black),
                         ),
@@ -754,9 +754,9 @@ class Homepage extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(context, "/Account");
                           },
-                          icon: Icon(Icons.person, size: 30),
+                          icon: const Icon(Icons.person, size: 30),
                         ),
-                        Text("Profile", style: TextStyle(fontSize: 15)),
+                        const Text("Profile", style: TextStyle(fontSize: 15)),
                       ],
                     ),
                   ],

@@ -24,7 +24,7 @@ class Search extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 300,
                           child: TextField(
                             decoration: InputDecoration(
@@ -43,7 +43,7 @@ class Search extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             "Cancel",
                             style: TextStyle(
                               fontSize: 20,
@@ -53,13 +53,13 @@ class Search extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Container(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Recent searches",
                             style: TextStyle(
                               fontSize: 20,
@@ -70,11 +70,11 @@ class Search extends StatelessWidget {
 
                           TextButton(
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               "Clear",
                               style: TextStyle(
                                 fontSize: 18,
-                                color: const Color.fromARGB(255, 147, 24, 24),
+                                color: Color.fromARGB(255, 147, 24, 24),
                               ),
                             ),
                           ),
@@ -94,7 +94,7 @@ class Search extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
 
@@ -122,7 +122,7 @@ class Search extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
 
@@ -150,7 +150,7 @@ class Search extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
 
@@ -178,7 +178,7 @@ class Search extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
 
@@ -206,7 +206,7 @@ class Search extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(Icons.search, size: 30, color: Colors.grey),
 
@@ -240,13 +240,13 @@ class Search extends StatelessWidget {
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Homepage(),
+                                      builder: (context) => const Homepage(),
                                     ),
                                   );
                                 },
-                                icon: Icon(Icons.food_bank_outlined, size: 30),
+                                icon: const Icon(Icons.food_bank_outlined, size: 30),
                               ),
-                              Text(
+                              const Text(
                                 "Home",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -264,21 +264,21 @@ class Search extends StatelessWidget {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Homepage(),
+                                    builder: (context) => const Homepage(),
                                   ),
                                 );
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.search,
                                 size: 30,
-                                color: const Color.fromARGB(255, 147, 24, 24),
+                                color: Color.fromARGB(255, 147, 24, 24),
                               ),
                             ),
-                            Text(
+                            const Text(
                               "Search",
                               style: TextStyle(
                                 fontSize: 15,
-                                color: const Color.fromARGB(255, 147, 24, 24),
+                                color: Color.fromARGB(255, 147, 24, 24),
                               ),
                             ),
                           ],
@@ -287,9 +287,9 @@ class Search extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () {},
-                              icon: Icon(Icons.receipt_long, size: 30),
+                              icon: const Icon(Icons.receipt_long, size: 30),
                             ),
-                            Text(
+                            const Text(
                               "Orders",
                               style: TextStyle(
                                 fontSize: 15,
@@ -303,9 +303,9 @@ class Search extends StatelessWidget {
                             IconButton(
                               onPressed: () {                        Navigator.pushNamed(context, "/Account");
 },
-                              icon: Icon(Icons.person, size: 30),
+                              icon: const Icon(Icons.person, size: 30),
                             ),
-                            Text(
+                            const Text(
                               "Profile",
                               style: TextStyle(
                                 fontSize: 15,
