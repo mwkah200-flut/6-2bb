@@ -77,7 +77,6 @@ class Mcdonalds extends StatelessWidget {
                     ),
                   ),
 
-                  /// Text 2
                   Align(
                     alignment: const Alignment(0, 0.6),
                     child: SizedBox(

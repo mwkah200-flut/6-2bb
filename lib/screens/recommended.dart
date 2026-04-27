@@ -45,7 +45,6 @@ class _RecommendedState extends State<Recommended> {
     print(result);
     if (result["success"] == true) {
       setState(() {
-        // اتأكدنا إننا بناخد الـ items من الـ data
         restaurants = result["data"]["items"] ?? [];
         isLoading = false;
       });
@@ -66,16 +65,14 @@ class _RecommendedState extends State<Recommended> {
             ? const Center(child: CircularProgressIndicator())
             : Column(
                 children: [
-                  // buildRestaurantCard(),
-                  // استخدمنا Expanded مع GridView عشان يعرض المطاعم بشكل شيك وتلقائي
                   Expanded(
                     child: GridView.builder(
                       padding: EdgeInsets.all(10),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // عنصرين في كل صف
+                        crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 20,
-                        childAspectRatio: 0.55, // تحكم في طول الكارت
+                        childAspectRatio: 0.55, 
                       ),
                       itemCount: restaurants.length,
                       itemBuilder: (context, index) {

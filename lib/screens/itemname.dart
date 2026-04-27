@@ -36,7 +36,6 @@ class _ItemnameState extends State<Itemname> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// HEADER
               SizedBox(
                 height: 250,
                 child: Stack(
@@ -105,7 +104,6 @@ class _ItemnameState extends State<Itemname> {
 
               SizedBox(height: 30),
 
-              /// PRICE + COUNTER
               Center(
                 child: Container(
                   width: 240,
@@ -149,7 +147,6 @@ class _ItemnameState extends State<Itemname> {
 
               SizedBox(height: 20),
 
-              /// DESCRIPTION
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
@@ -168,7 +165,7 @@ class _ItemnameState extends State<Itemname> {
 
               SizedBox(height: 20),
 
-              /// ADDONS
+              
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text("Add ons", style: TextStyle(fontSize: 18)),
@@ -189,7 +186,6 @@ class _ItemnameState extends State<Itemname> {
 
               SizedBox(height: 20),
 
-              /// SPECIAL INSTRUCTIONS
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -206,7 +202,6 @@ class _ItemnameState extends State<Itemname> {
 
               SizedBox(height: 30),
 
-              /// ADD TO CART BUTTON
               Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -219,7 +214,7 @@ class _ItemnameState extends State<Itemname> {
                         name: widget.item["name"] ?? "Item",
                         price: mealPrice,
                         quantity: count1,
-                        restaurant: widget.item["restaurant"], // 👈 مهم
+                        restaurant: widget.item["restaurant"],
                       ),
                     );
 

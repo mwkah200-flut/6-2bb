@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageService {
-  // --- Access Token (تذكرة الدخول المؤقتة) ---
   static Future<void> saveToken(String token) async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.setString('accessToken', token); 

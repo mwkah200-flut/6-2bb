@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/services/api_service.dart'; // تأكد من المسار
+import 'package:flutter_application_1/services/api_service.dart'; 
 
 class Changepssword extends StatefulWidget {
   const Changepssword({super.key});
@@ -11,7 +11,6 @@ class Changepssword extends StatefulWidget {
 }
 
 class _ChangepsswordState extends State<Changepssword> {
-  // 1. تعريف الـ Controllers
   final currentPasswordController = TextEditingController();
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -34,7 +33,6 @@ class _ChangepsswordState extends State<Changepssword> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 60),
-                  // Current Password Section
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -54,7 +52,6 @@ class _ChangepsswordState extends State<Changepssword> {
                     ],
                   ),
                   SizedBox(height: 30),
-                  // New Password Section
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -88,7 +85,6 @@ class _ChangepsswordState extends State<Changepssword> {
                     ],
                   ),
                   SizedBox(height: 30),
-                  // Confirm Password Section
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -122,7 +118,6 @@ class _ChangepsswordState extends State<Changepssword> {
                     ],
                   ),
                   SizedBox(height: 60),
-                  // Button Section
                   Container(
                     padding: EdgeInsets.only(right: 10),
                     height: 50,
@@ -135,7 +130,6 @@ class _ChangepsswordState extends State<Changepssword> {
                         backgroundColor: const Color.fromARGB(255, 147, 24, 24),
                       ),
                       onPressed: isLoading ? null : () async {
-                        // 1. التأكد من تطابق الباسورد الجديد
                         if (newPasswordController.text != confirmPasswordController.text) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("Passwords do not match!")),
@@ -145,7 +139,6 @@ class _ChangepsswordState extends State<Changepssword> {
 
                         setState(() => isLoading = true);
 
-                        // 2. مناداة الـ API
                         var response = await ApiService.changePassword(
                           currentPasswordController.text,
                           newPasswordController.text,

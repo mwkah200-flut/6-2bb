@@ -13,7 +13,6 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
-  // 👇 كل سويتش ليه state لوحده
   bool pushOn = false;
   bool smsOn = false;
   bool promoOn = false;

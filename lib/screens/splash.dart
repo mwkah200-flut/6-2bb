@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:app_links/app_links.dart'; // تأكد من إضافة الـ package
+import 'package:app_links/app_links.dart'; 
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,7 +11,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final _appLinks = AppLinks(); // تعريف الـ Service
+  final _appLinks = AppLinks(); 
   StreamSubscription? _linkSubscription;
 
   @override

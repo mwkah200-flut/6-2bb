@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/services/api_service.dart'; // تأكد من المسار
+import 'package:flutter_application_1/services/api_service.dart'; 
 
 class Profileinfo extends StatefulWidget {
   const Profileinfo({super.key});
@@ -26,17 +26,14 @@ class _ProfileinfoState extends State<Profileinfo> {
         body: FutureBuilder<Map<String, dynamic>>(
           future: ApiService.getProfile(),
           builder: (context, snapshot) {
-            // 1. حالة التحميل
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 147, 24, 24)));
             }
 
-            // 2. حالة الخطأ أو فشل التوكن
             if (snapshot.hasError || (snapshot.data != null && snapshot.data!["success"] == false)) {
               return Center(child: Text("Failed to load profile data"));
             }
 
-            // 3. البيانات وصلت بالسلامة
             final userData = snapshot.data!["data"];
 
             return SingleChildScrollView(
@@ -47,22 +44,18 @@ class _ProfileinfoState extends State<Profileinfo> {
                   children: [
                     SizedBox(height: 40),
                     
-                    // Full Name Section
                     _buildInfoSection("FULL NAME", userData["fullName"] ?? "Not Provided"),
                     
                     SizedBox(height: 30),
 
-                    // Email Section
                     _buildInfoSection("EMAIL ADDRESS", userData["email"] ?? "Not Provided"),
 
                     SizedBox(height: 30),
 
-                    // Phone Section
                     _buildInfoSection("PHONE NUMBER", userData["phone"] ?? "Not Provided"),
 
                     SizedBox(height: 30),
 
-                    // Password Section
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

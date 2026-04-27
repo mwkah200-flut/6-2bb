@@ -49,13 +49,6 @@ class _HomepageState extends State<Homepage> {
       "rate": "4.2",
       "about": "Lorem ipsum dolor sit amet",
     },
-{
-      "name": "jkbkjbkj",
-      "image":
-          "https://cdn.britannica.com/08/177308-050-94D9D6BE/Food-Pizza-Basil-Tomato.jpg",
-      "rate": "4.23333",
-      "about": "Lorem ipsum lhkjibjkbkbjk sit amet",
-    },
 
     
   ];
@@ -127,7 +120,6 @@ class _HomepageState extends State<Homepage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      // HEADER
                       SizedBox(
                         width: double.infinity,
                         height: 150,

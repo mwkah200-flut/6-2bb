@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/cartdata.dart';
@@ -35,7 +34,6 @@ class _YourOrdersState extends State<YourOrders> {
             ? const Center(child: Text("Cart is empty"))
             : Column(
                 children: [
-                  /// ITEMS LIST
                   Expanded(
                     child: ListView.builder(
                       itemCount: CartData.items.length,
@@ -53,7 +51,6 @@ class _YourOrdersState extends State<YourOrders> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                /// NAME + QTY
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -67,7 +64,6 @@ class _YourOrdersState extends State<YourOrders> {
                                   ],
                                 ),
 
-                                /// PRICE
                                 Text(
                                   "${(item.price * item.quantity).toStringAsFixed(2)} EGP",
                                   style: const TextStyle(
@@ -134,7 +130,6 @@ class _YourOrdersState extends State<YourOrders> {
                     ),
                   ),
 
-                  /// SUMMARY
                   Container(
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(

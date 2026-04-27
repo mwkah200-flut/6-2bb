@@ -21,7 +21,6 @@ class _ResturantPageState extends State<ResturantPage> {
     restaurant = widget.restaurant;
   }
 
-  /// 👇 Fake items (replace later with API)
   final List<Map<String, dynamic>> items = [
     {
       "name": "Burger",
@@ -55,7 +54,6 @@ class _ResturantPageState extends State<ResturantPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// HEADER
               Stack(
                 children: [
                   Container(
@@ -84,7 +82,6 @@ class _ResturantPageState extends State<ResturantPage> {
                 ],
               ),
 
-              /// NAME
               Padding(
                 padding: const EdgeInsets.only(left: 10, top: 20),
                 child: Text(
@@ -96,7 +93,6 @@ class _ResturantPageState extends State<ResturantPage> {
                 ),
               ),
 
-              /// INFO
               Padding(
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 child: Row(
@@ -112,7 +108,6 @@ class _ResturantPageState extends State<ResturantPage> {
 
               const SizedBox(height: 20),
 
-              /// FEATURED ITEMS
               const Padding(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
@@ -123,7 +118,6 @@ class _ResturantPageState extends State<ResturantPage> {
 
               const SizedBox(height: 15),
 
-              /// HORIZONTAL ITEMS
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -136,7 +130,7 @@ class _ResturantPageState extends State<ResturantPage> {
                             builder: (context) => Itemname(
                               item: {
                                 ...item,
-                                "restaurant": restaurant, // 👈 أهم سطر
+                                "restaurant": restaurant, 
                               },
                             ),
                           ),
@@ -171,7 +165,6 @@ class _ResturantPageState extends State<ResturantPage> {
 
               const SizedBox(height: 20),
 
-              /// MOST POPULAR
               const Padding(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
@@ -182,7 +175,6 @@ class _ResturantPageState extends State<ResturantPage> {
 
               const SizedBox(height: 10),
 
-              /// LIST ITEMS
               Column(
                 children: items.map((item) {
                   return InkWell(
@@ -193,7 +185,7 @@ class _ResturantPageState extends State<ResturantPage> {
                           builder: (context) => Itemname(
                             item: {
                               ...item,
-                              "restaurant": restaurant, // 👈 أهم سطر
+                              "restaurant": restaurant,
                             },
                           ),
                         ),

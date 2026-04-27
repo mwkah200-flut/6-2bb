@@ -68,7 +68,7 @@ class ApiService {
         return true;
       } else {
         print("❌ Refresh Token Expired or Invalid");
-        await StorageService.clearAll(); // امسح الكل لو الـ refresh باظ
+        await StorageService.clearAll(); 
         return false;
       }
     } catch (e) {
@@ -141,7 +141,6 @@ class ApiService {
     }
   }
 
-  // --- 5. ميثود الـ Verify Phone ---
   static Future<Map<String, dynamic>> verifyPhone(
     String code,
     String token,
@@ -187,10 +186,8 @@ class ApiService {
   }
 
   static Future<Map<String, dynamic>> getProfile() async {
-    // 1. تأكد من المسار الكامل (هل محتاج /api/v1 ؟)
     final url = Uri.parse('$baseUrl/profile');
 
-    // 2. نجيب التوكن ونطبع قيمته للتأكد (Debug)
     String? token = await StorageService.getToken();
     print("Using Token: $token");
 
@@ -200,7 +197,7 @@ class ApiService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token', // تأكد من كلمة Bearer ومسافة بعدها
+          'Authorization': 'Bearer $token', 
         },
       );
 

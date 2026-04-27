@@ -125,7 +125,6 @@ class _CreateaccountState extends State<Createaccount> {
 
                                 Container(
                                   decoration: BoxDecoration(
-                                    // color: Colors.purple[100],
                                     borderRadius: BorderRadius.circular(66),
                                   ),
                                   width: double.infinity,

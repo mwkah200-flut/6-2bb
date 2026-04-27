@@ -2,7 +2,7 @@ class CartItem {
   final String name;
   final double price;
   final int quantity;
-  final Map restaurant; // 👈 إضافة مهمة
+  final Map restaurant; 
 
   CartItem({
     required this.name,
