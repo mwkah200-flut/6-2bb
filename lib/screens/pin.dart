@@ -13,7 +13,7 @@ class Pin extends StatefulWidget {
 
 class _PinState extends State<Pin> {
   final codeController = TextEditingController();
-  bool isLoading = false; // تعريف متغير التحميل
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ class _PinState extends State<Pin> {
       child: Scaffold(
         appBar: AppBar(centerTitle: true, title: Text("PiN")),
         body: SingleChildScrollView(
-          // عشان الكيبورد لما يفتح
           child: Container(
             padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
             width: double.infinity,
@@ -38,7 +37,7 @@ class _PinState extends State<Pin> {
                     Text("Verify phone number", style: TextStyle(fontSize: 30)),
                     SizedBox(height: 30),
                     Text(
-                      "Enter the 4-digit code sent to you at ${widget.phonenumber}",
+                      "Enter the 4-digit code sent to you at your phone number",
                       style: TextStyle(fontSize: 15, color: Colors.grey),
                     ),
                   ],
@@ -88,7 +87,6 @@ class _PinState extends State<Pin> {
 
                             setState(() => isLoading = true);
 
-                            // بنبعت الـ code والـ token بس (شيلنا الـ phoneNumber من هنا)
                             var response = await ApiService.verifyPhone(
                               codeController.text,
                               token,
@@ -100,21 +98,22 @@ class _PinState extends State<Pin> {
 
                             if (response['success'] == true) {
                               if (mounted) {
-                                // مبروك! الحساب اتفعل، وديه للـ Login أو الـ Home
-                                Navigator.pushReplacementNamed(
+                                Navigator.pushNamedAndRemoveUntil(
                                   context,
                                   "/homepage",
+                                  (route) => false,
                                 );
                               }
                             } else {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                "/homepage",
+                                (route) => false,
+                              );
                               String msg =
                                   response['error']?['message'] ??
                                   "Verification Failed";
                               if (mounted) {
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  "/homepage",
-                                );
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(msg),

@@ -1,206 +1,217 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-class yourorders extends StatelessWidget {
-  const yourorders({super.key});
+import 'dart:ffi';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/cartdata.dart';
+import 'package:flutter_application_1/screens/resturantname.dart';
+
+class YourOrders extends StatefulWidget {
+  const YourOrders({super.key});
+
+  @override
+  State<YourOrders> createState() => _YourOrdersState();
+}
+
+class _YourOrdersState extends State<YourOrders> {
+  double get subtotal {
+    return CartData.items.fold(
+      0,
+      (sum, item) => sum + (item.price * item.quantity),
+    );
+  }
+
+  double delivery = 0;
+
+  double get total => subtotal + delivery;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(centerTitle: true, title: Text("Your Orders")),
+        appBar: AppBar(centerTitle: true, title: const Text("Your Orders")),
 
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _order("1"),
-            Divider(),
-            _order("1"),
-            Divider(),
-            _order("2"),
-            Divider(),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: CartData.items.isEmpty
+            ? const Center(child: Text("Cart is empty"))
+            : Column(
                 children: [
-                  Text(
-                    "Subtotal",
-                    style: TextStyle(fontSize: 22, color: Colors.black),
+                  /// ITEMS LIST
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: CartData.items.length,
+                      itemBuilder: (context, index) {
+                        final item = CartData.items[index];
+
+                        return Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.grey.shade300),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                /// NAME + QTY
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.name.isNotEmpty
+                                          ? item.name
+                                          : "Unknown Item",
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                    Text("Qty: ${item.quantity}"),
+                                  ],
+                                ),
+
+                                /// PRICE
+                                Text(
+                                  "${(item.price * item.quantity).toStringAsFixed(2)} EGP",
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                  Text(
-                    "XXXEGP",
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
+                  InkWell(
+                   onTap: () {
+  if (CartData.items.isEmpty) return;
+
+  final restaurant = CartData.items.first.restaurant;
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => ResturantPage(
+        restaurant: restaurant,
+      ),
+    ),
+  );
+},
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Add more items",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: const Color.fromARGB(255, 147, 24, 24),
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios),
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Promo code",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.blueGrey,
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /// SUMMARY
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        row("Subtotal", subtotal),
+                        row("Delivery", delivery),
+                        const Divider(),
+                        row("Total", total, isBold: true),
+
+                        const SizedBox(height: 20),
+
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromARGB(
+                                255,
+                                147,
+                                24,
+                                24,
+                              ),
+                            ),
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.green,
+                                  content: Text("Order Placed 🚀"),
+                                ),
+                                
+                              );
+                              Navigator.pushNamed(context, "/addcard");
+                            },
+                            child: const Text(
+                              "Checkout",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "delivery",
-                    style: TextStyle(fontSize: 22, color: Colors.black),
-                  ),
-                  Text(
-                    "0EGP",
-                    style: TextStyle(fontSize: 22, color: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              alignment: Alignment.centerRight,
-              child: Text(
-                "XXXEGP",
-                style: TextStyle(
-                  fontSize: 22,
-                  color: const Color.fromARGB(255, 147, 24, 24),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Add more items",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: const Color.fromARGB(255, 147, 24, 24),
-                      ),
-                    ),
-                    Icon(Icons.arrow_forward_ios),
-                  ],
-                ),
-              ),
-            ),
-
-            SizedBox(height: 5),
-            Divider(),
-            SizedBox(height: 5),
-
-            InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Promo code",
-                      style: TextStyle(fontSize: 20, color: Colors.blueGrey),
-                    ),
-                    Icon(Icons.arrow_forward_ios),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 5),
-            Divider(),
-            SizedBox(height: 30),
-            SizedBox(
-              height: 40,
-              width: 400,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(8),
-                  ),
-                  backgroundColor: const Color.fromARGB(255, 147, 24, 24),
-                ),
-                onPressed: () {
-
-                    Navigator.pushNamed(context, "/addcard");
-
-                },
-                label: Text(
-                  "CONTINUE (AUD 30)",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
 
-  Widget _order(String num) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 35,
-                  height: 35,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                      color: const Color.fromARGB(116, 0, 0, 0),
-                    ),
-                    borderRadius: BorderRadius.circular(9),
-                  ),
-                  child: Center(
-                    child: Text(
-                      num,
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: const Color.fromARGB(255, 147, 24, 24),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Item",
-                      style: TextStyle(fontSize: 22, color: Colors.blueGrey),
-                    ),
-                    Text(
-                      "xxxxxxxxxx",
-                      style: TextStyle(fontSize: 18, color: Colors.blueGrey),
-                    ),
-                    Text(
-                      "xxxxxxxxxxxxxxxx",
-                      style: TextStyle(fontSize: 18, color: Colors.blueGrey),
-                    ),
-                  ],
-                ),
-              ],
+  Widget row(String title, double value, {bool isBold = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
             ),
-            Text(
-              "XXXEGP",
-              style: TextStyle(
-                fontSize: 22,
-                color: const Color.fromARGB(255, 147, 24, 24),
-              ),
+          ),
+          Text(
+            "${value.toStringAsFixed(2)} EGP",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+              color: isBold ? Colors.red : Colors.black,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
-
-
 }

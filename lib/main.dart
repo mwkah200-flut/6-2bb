@@ -3,7 +3,7 @@ import 'package:flutter_application_1/screens/Account.dart';
 import 'package:flutter_application_1/screens/Resetsent.dart';
 import 'package:flutter_application_1/screens/Welcome.dart';
 import 'package:flutter_application_1/screens/addcard.dart';
-import 'package:flutter_application_1/screens/changepssword.dart';
+import 'package:flutter_application_1/screens/changepassword.dart';
 import 'package:flutter_application_1/screens/createAccount.dart';
 import 'package:flutter_application_1/screens/forgotpassword.dart';
 import 'package:flutter_application_1/screens/homepage.dart';
@@ -16,6 +16,7 @@ import 'package:flutter_application_1/screens/profileinfo.dart';
 import 'package:flutter_application_1/screens/recommended.dart';
 import 'package:flutter_application_1/screens/resturantname.dart';
 import 'package:flutter_application_1/screens/search.dart';
+import 'package:flutter_application_1/screens/splash.dart';
 import 'package:flutter_application_1/screens/yourorders.dart';
 
 void main() {
@@ -30,8 +31,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: "/",
       routes: {
-        "/": (context) => const Welcome(),
+        "/": (context) => const SplashScreen(),
         "/login": (context) =>  Login(),
+        "/Welcome": (context) =>  Welcome(),
         "/forgotpassword": (context) => const Forgotpassword(),
         "/Resetsent": (context) => const Resetsent(),
         "/createAccount": (context) =>  Createaccount(),
@@ -39,11 +41,9 @@ class MyApp extends StatelessWidget {
         "/pin": (context) =>  const Pin(phonenumber: ""),
         "/homepage": (context) => const Homepage(),
         "/search": (context) => const Search(),
-        "/resturantname": (context) => const ResturantPage(),
-        "/itemname": (context) => const Itemname(),
-        "/recommended": (context) => const Recommended(),
+        "/recommended": (context) =>  Recommended(),
         "/addcard": (context) => const AddCard(),
-        "/yourorders": (context) => const yourorders(),
+        "/yourorders": (context) =>  YourOrders(),
         "/mcdonalds": (context) => const Mcdonalds(),
         "/Account": (context) => const Account(),
         "/profileinfo": (context) => Profileinfo(),

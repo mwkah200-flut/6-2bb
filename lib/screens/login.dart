@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/api_service.dart';
+import 'package:flutter_application_1/services/storage_service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Login extends StatefulWidget {
@@ -12,28 +13,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final EmailController = TextEditingController();
-
   final passwordController = TextEditingController();
-
   bool _isPasswordObscure = true;
-
-  void login() async {
-    var response = await ApiService.login(
-      EmailController.text,
-      passwordController.text,
-    );
-
-    if (response["success"] == true) {
-      var data = response["data"];
-
-      String accessToken = data["accessToken"];
-      String refreshToken = data["refreshToken"];
-
-      print("ACCESS TOKEN: $accessToken");
-    } else {
-      print(response["error"]);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +37,7 @@ class _LoginState extends State<Login> {
                             "WELCOME TO BITE BACK",
                             style: TextStyle(fontSize: 30),
                           ),
-
                           SizedBox(height: 30),
-
                           Text(
                             "Enter your phone number or Email address for Log in. Enjoy your food :)",
                             style: TextStyle(fontSize: 15, color: Colors.grey),
@@ -72,7 +51,6 @@ class _LoginState extends State<Login> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              // color: Colors.purple[100],
                               borderRadius: BorderRadius.circular(66),
                             ),
                             width: double.infinity,
@@ -92,14 +70,12 @@ class _LoginState extends State<Login> {
                           SizedBox(height: 20),
                           Container(
                             decoration: BoxDecoration(
-                              // color: Colors.purple[100],
                               borderRadius: BorderRadius.circular(66),
                             ),
                             width: double.infinity,
                             padding: EdgeInsets.symmetric(horizontal: 16),
                             child: TextField(
                               controller: passwordController,
-
                               obscureText: _isPasswordObscure,
                               decoration: InputDecoration(
                                 suffix: IconButton(
@@ -123,10 +99,6 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
-                         
-                         
-                         
-                         
                           SizedBox(height: 40),
                           Container(
                             child: TextButton(
@@ -169,39 +141,51 @@ class _LoginState extends State<Login> {
                                   passwordController.text,
                                 );
 
-                                if (response["success"] == true ||
-                                    response["accessToken"] != null) {
+                                if (response["success"] == true) {
                                   print("✅ Login Success!");
 
-                                  // Extract token based on your API response structure
-                                  String token =
-                                      response["accessToken"] ??
-                                      response["data"]["accessToken"];
-                                  print("Token: $token");
+                                  var data = response["data"];
+                                  String token = data["accessToken"];
+                                  String refreshToken =
+                                      data["refreshToken"] ?? "";
+
+                                  // 🔴 إضافة أوامر الحفظ هنا لحل مشكلة الـ null
+                                  await StorageService.saveToken(token);
+                                  await StorageService.saveRefreshToken(
+                                    refreshToken,
+                                  );
+
+                                  bool isVerified =
+                                      data["user"]["isVerified"] ?? false;
 
                                   if (context.mounted) {
-                                    Navigator.pushNamed(
-                                      context,
-                                      "/pin",
-                                      arguments: {
-                                        "phoneNumber": EmailController.text,
-                                        "token": token,
-                                      },
-                                    );
+                                    if (isVerified) {
+                                      Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        "/homepage",
+                                        (route) => false,
+                                      );
+                                    } else {
+                                      Navigator.pushNamed(
+                                        context,
+                                        "/pin",
+                                        arguments: {
+                                          "phoneNumber": EmailController.text,
+                                          "token": token,
+                                        },
+                                      );
+                                    }
                                   }
                                 } else {
                                   print("❌ Login Failed");
-
-                                  // Handling nested error message from your specific API response
-                                  String errorMsg = "Wrong email or password";
-                                  if (response["error"] != null &&
-                                      response["error"]["message"] != null) {
-                                    errorMsg = response["error"]["message"];
-                                  }
-
                                   if (context.mounted) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(errorMsg)),
+                                      SnackBar(
+                                        content: Text(
+                                          response["message"] ??
+                                              "Wrong email or password",
+                                        ),
+                                      ),
                                     );
                                   }
                                 }
@@ -274,7 +258,6 @@ class _LoginState extends State<Login> {
                                     padding: EdgeInsets.all(3),
                                     height: 28,
                                     width: 28,
-
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.white,

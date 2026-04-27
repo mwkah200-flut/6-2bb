@@ -209,7 +209,6 @@ class _CreateaccountState extends State<Createaccount> {
                                       ),
                                     ),
                                     onPressed: () async {
-                                      // 1. تنفيذ عملية الـ Signup
                                       var regResponse =
                                           await ApiService.register(
                                             fullnameController.text,
@@ -224,7 +223,6 @@ class _CreateaccountState extends State<Createaccount> {
                                         );
 
                                         if (context.mounted) {
-                                          // 2. إظهار رسالة نجاح للمستخدم
                                           ScaffoldMessenger.of(
                                             context,
                                           ).showSnackBar(
@@ -236,15 +234,12 @@ class _CreateaccountState extends State<Createaccount> {
                                             ),
                                           );
 
-                                          // 3. الانتقال لصفحة الـ Login
-                                          // استخدمنا pushReplacementNamed عشان اليوزر ميرجعش لصفحة الـ Signup تاني بالزرار اللي ورا
                                           Navigator.pushReplacementNamed(
                                             context,
                                             "/login",
                                           );
                                         }
                                       } else {
-                                        // 4. لو الـ Signup فشل (مثلاً الإيميل مستخدم قبل كدة أو بيانات ناقصة)
                                         String errorMsg =
                                             regResponse['error']?['message'] ??
                                             "email must be an email,Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character, password must be longer than or equal to 8 characters";

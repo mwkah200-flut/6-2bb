@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/cartdata.dart';
 
 class Itemname extends StatefulWidget {
-  const Itemname({super.key});
+  final Map item;
+
+  const Itemname({super.key, required this.item});
 
   @override
   State<Itemname> createState() => _ItemnameState();
@@ -10,12 +14,18 @@ class Itemname extends StatefulWidget {
 
 class _ItemnameState extends State<Itemname> {
   int count1 = 1;
-  int count2 = 1;
   String? selectedAddon;
 
-  final double mealPrice = 11.99; // سعر الوجبة
+  late double mealPrice;
 
   double get totalPrice => mealPrice * count1;
+
+  @override
+  void initState() {
+    super.initState();
+
+    mealPrice = (widget.item["price"] ?? 11.99).toDouble();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +54,7 @@ class _ItemnameState extends State<Itemname> {
                         ),
                       ),
                     ),
+
                     Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
@@ -54,26 +65,35 @@ class _ItemnameState extends State<Itemname> {
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
+
                     Align(
                       alignment: Alignment(0, -0.6),
-                      child: Text("Item name", style: TextStyle(fontSize: 25)),
+                      child: Text(
+                        widget.item["name"] ?? "Item name",
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
                     ),
+
                     Align(
                       alignment: Alignment(0, -0.35),
                       child: Text(
-                        "xxxxxxxxxxxxxxxxxxx",
-                        style: TextStyle(fontSize: 18),
+                        widget.item["description"] ?? "Delicious food item",
+                        style: TextStyle(fontSize: 16, color: Colors.white70),
                       ),
                     ),
+
                     Align(
                       alignment: Alignment(0, 1.2),
                       child: Container(
                         height: 150,
+                        width: 150,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(
-                              "https://cdn.britannica.com/08/177308-050-94D9D6BE/Food-Pizza-Basil-Tomato.jpg",
+                              widget.item["image"] ??
+                                  "https://cdn.britannica.com/08/177308-050-94D9D6BE/Food-Pizza-Basil-Tomato.jpg",
                             ),
+                            fit: BoxFit.cover,
                           ),
                           shape: BoxShape.circle,
                         ),
@@ -88,31 +108,28 @@ class _ItemnameState extends State<Itemname> {
               /// PRICE + COUNTER
               Center(
                 child: Container(
-                  width: 220,
-                  height: 45,
+                  width: 240,
+                  height: 50,
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(24),
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(25),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(padding: EdgeInsetsGeometry.only( left: 15),
-                        child: Text(
-                          "\$${mealPrice.toStringAsFixed(2)}",
-                          style: TextStyle(fontSize: 18),
-                        ),
+                      Text(
+                        "\$${mealPrice.toStringAsFixed(2)}",
+                        style: TextStyle(fontSize: 18),
                       ),
+
                       Row(
                         children: [
                           IconButton(
                             icon: Icon(Icons.remove),
                             onPressed: () {
                               if (count1 > 1) {
-                                setState(() {
-                                  count1--;
-                                });
+                                setState(() => count1--);
                               }
                             },
                           ),
@@ -120,9 +137,7 @@ class _ItemnameState extends State<Itemname> {
                           IconButton(
                             icon: Icon(Icons.add),
                             onPressed: () {
-                              setState(() {
-                                count1++;
-                              });
+                              setState(() => count1++);
                             },
                           ),
                         ],
@@ -136,15 +151,19 @@ class _ItemnameState extends State<Itemname> {
 
               /// DESCRIPTION
               Padding(
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.all(10),
                 child: Text(
                   "Description",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
+
               Padding(
-                padding: EdgeInsets.all(10),
-                child: Text("xxxxxxxxxxxxxxxxxxxxxx"),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  widget.item["description"] ??
+                      "Fresh and tasty food prepared with high quality ingredients.",
+                ),
               ),
 
               SizedBox(height: 20),
@@ -152,34 +171,16 @@ class _ItemnameState extends State<Itemname> {
               /// ADDONS
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Add ons", style: TextStyle(fontSize: 18)),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.red.shade200,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text("Optional"),
-                    ),
-                  ],
-                ),
+                child: Text("Add ons", style: TextStyle(fontSize: 18)),
               ),
 
               Column(
-                children: ["xxxxxxxxx", "xxxxxxx", "xxxxxx", "xxxxxx"].map((e) {
+                children: ["Cheese", "Extra Sauce", "Spicy", "Fries"].map((e) {
                   return RadioListTile<String>(
                     value: e,
                     groupValue: selectedAddon,
                     onChanged: (v) {
-                      setState(() {
-                        selectedAddon = v;
-                      });
+                      setState(() => selectedAddon = v);
                     },
                     title: Text(e),
                   );
@@ -188,6 +189,7 @@ class _ItemnameState extends State<Itemname> {
 
               SizedBox(height: 20),
 
+              /// SPECIAL INSTRUCTIONS
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -198,68 +200,33 @@ class _ItemnameState extends State<Itemname> {
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.grey,
-                      size: 30,
-                    ),
-                  ),
+                  Icon(Icons.arrow_forward_ios, color: Colors.grey),
                 ],
               ),
-              Center(
-                child: Container(
-                  width: 220,
-                  height: 45,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    // color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child:
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.remove),
-                            onPressed: () {
-                              if (count2 > 1) {
-                                setState(() {
-                                  count2--;
-                                });
-                              }
-                            },
-                          ),
-                          Text("$count2"),
-                          IconButton(
-                            icon: Icon(Icons.add),
-                            onPressed: () {
-                              setState(() {
-                                count2++;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    
-                ),
-              ),
 
-              /// ADD TO ORDER BUTTON
+              SizedBox(height: 30),
+
+              /// ADD TO CART BUTTON
               Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 147, 24, 24),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                   ),
                   onPressed: () {
+                    CartData.items.add(
+                      CartItem(
+                        name: widget.item["name"] ?? "Item",
+                        price: mealPrice,
+                        quantity: count1,
+                        restaurant: widget.item["restaurant"], // 👈 مهم
+                      ),
+                    );
+
                     Navigator.pushNamed(context, "/yourorders");
                   },
                   child: Text(
-                    "Add TO ORDER (\$${totalPrice.toStringAsFixed(2)})",
+                    "Add To Cart (\$${totalPrice.toStringAsFixed(2)})",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

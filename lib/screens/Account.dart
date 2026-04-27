@@ -2,6 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/homepage.dart';
+import 'package:flutter_application_1/services/api_service.dart';
+import 'package:flutter_application_1/services/storage_service.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -23,158 +25,178 @@ class _AccountState extends State<Account> {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            SizedBox(
-              width: double.infinity,
-              height: 750,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Account Settings",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      SizedBox(height: 20),
-
-                      Text(
-                        "Update your settings like notification , payments , profile edit etc",
-                        style: TextStyle(fontSize: 16),
-                      ),
-
-                      SizedBox(height: 20),
-
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/profileinfo");
-                        },
-                        child: _row(
-                          Icons.person,
-                          "Profile information",
-                          "Change your account information",
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/changepassword");
-                        },
-                        child: _row(
-                          Icons.lock,
-                          "Change password",
-                          "change your password",
-                        ),
-                      ),
-                      _row(
-                        Icons.payment,
-                        "Payment methods",
-                        "Add your credit & debit",
-                      ),
-                      _row(
-                        Icons.location_on,
-                        "Locations",
-                        "Add or remove your delivery locations",
-                      ),
-                      _row(
-                        Icons.facebook,
-                        "Add social accounts",
-                        "Add facebook , twitter , etc",
-                      ),
-                      _row(
-                        Icons.ios_share,
-                        "refer to friends",
-                        "Get 10 \$ for reffering friends",
-                      ),
-
-                      SizedBox(height: 20),
-
-                      Text(
-                        "Notifications",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-
-                      SizedBox(height: 15),
-
-                      _row2(
-                        "Push Notification",
-                        "For daily update you will get it",
-                        pushOn,
-                        (value) {
-                          setState(() {
-                            pushOn = value;
-                          });
-                        },
-                      ),
-
-                      _row2(
-                        "SMS notifications",
-                        "For daily update you will get it",
-                        smsOn,
-                        (value) {
-                          setState(() {
-                            smsOn = value;
-                          });
-                        },
-                      ),
-
-                      _row2(
-                        "Promotional Notification",
-                        "For daily update you will get it",
-                        promoOn,
-                        (value) {
-                          setState(() {
-                            promoOn = value;
-                          });
-                        },
-                      ),
-
-                      SizedBox(height: 20),
-
-                      Text(
-                        "More",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-
-                      _row(
-                        Icons.star,
-                        "Rate us",
-                        "Rate us playsore , appstore",
-                      ),
-                      _row(
-                        Icons.menu_book,
-                        "FAQ",
-                        "Frequently asked questions",
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(Icons.logout),
-                                  SizedBox(width: 25),
-                                  Text("Logout"),
-                                ],
-                              ),
-                              Icon(Icons.arrow_forward_ios),
-                            ],
+            Expanded(
+              child: SizedBox(
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Account Settings",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 20),
+              
+                        Text(
+                          "Update your settings like notification , payments , profile edit etc",
+                          style: TextStyle(fontSize: 16),
+                        ),
+              
+                        SizedBox(height: 20),
+              
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/profileinfo");
+                          },
+                          child: _row(
+                            Icons.person,
+                            "Profile information",
+                            "Change your account information",
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/changepassword");
+                          },
+                          child: _row(
+                            Icons.lock,
+                            "Change password",
+                            "change your password",
+                          ),
+                        ),
+                        _row(
+                          Icons.payment,
+                          "Payment methods",
+                          "Add your credit & debit",
+                        ),
+                        _row(
+                          Icons.location_on,
+                          "Locations",
+                          "Add or remove your delivery locations",
+                        ),
+                        _row(
+                          Icons.facebook,
+                          "Add social accounts",
+                          "Add facebook , twitter , etc",
+                        ),
+                        _row(
+                          Icons.ios_share,
+                          "refer to friends",
+                          "Get 10 \$ for reffering friends",
+                        ),
+              
+                        SizedBox(height: 20),
+              
+                        Text(
+                          "Notifications",
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+              
+                        SizedBox(height: 15),
+              
+                        _row2(
+                          "Push Notification",
+                          "For daily update you will get it",
+                          pushOn,
+                          (value) {
+                            setState(() {
+                              pushOn = value;
+                            });
+                          },
+                        ),
+              
+                        _row2(
+                          "SMS notifications",
+                          "For daily update you will get it",
+                          smsOn,
+                          (value) {
+                            setState(() {
+                              smsOn = value;
+                            });
+                          },
+                        ),
+              
+                        _row2(
+                          "Promotional Notification",
+                          "For daily update you will get it",
+                          promoOn,
+                          (value) {
+                            setState(() {
+                              promoOn = value;
+                            });
+                          },
+                        ),
+              
+                        SizedBox(height: 20),
+              
+                        Text(
+                          "More",
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+              
+                        _row(
+                          Icons.star,
+                          "Rate us",
+                          "Rate us playsore , appstore",
+                        ),
+                        _row(
+                          Icons.menu_book,
+                          "FAQ",
+                          "Frequently asked questions",
+                        ),
+              
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: InkWell(
+                            onTap: () async {
+                              bool success = await ApiService.logout();
+              
+                              if (success) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  '/login',
+                                  (route) => false,
+                                );
+                              } else {
+                                await StorageService.clearAll();
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  '/Welcome',
+                                  (route) => false,
+                                );
+                              }
+                            },
+                            
+                            
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(Icons.logout),
+                                    SizedBox(width: 25),
+                                    Text("Logout"),
+                                  ],
+                                ),
+                                Icon(Icons.arrow_forward_ios),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

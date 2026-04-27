@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/services/api_service.dart'; // تأكد من المسار
 
 class Profileinfo extends StatefulWidget {
   const Profileinfo({super.key});
@@ -10,136 +10,113 @@ class Profileinfo extends StatefulWidget {
 }
 
 class _ProfileinfoState extends State<Profileinfo> {
-  final codeController = TextEditingController();
-  bool isLoading = false; // تعريف متغير التحميل
+  late Future<Map<String, dynamic>> _profileFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _profileFuture = ApiService.getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(centerTitle: true, title: Text("Profile Settings")),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 60),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "FULL NAME",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "XXXXXXXXXXXXX",
-                        style: TextStyle(color: Colors.black, fontSize: 18),
-                      ),
-                      Divider(),
-                    ],
-                  ),
-                  SizedBox(height: 030),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "EMAIL ADRESS",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "XXXXXXXXXXXXXXXXXXXXXXXX",
-                        style: TextStyle(color: Colors.black, fontSize: 18),
-                      ),
-                      Divider(),
-                    ],
-                  ),
-                  SizedBox(height: 30),
+        body: FutureBuilder<Map<String, dynamic>>(
+          future: ApiService.getProfile(),
+          builder: (context, snapshot) {
+            // 1. حالة التحميل
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 147, 24, 24)));
+            }
 
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "PHONE NUMBER",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "XXXXXXXXXX",
-                        style: TextStyle(color: Colors.black, fontSize: 18),
-                      ),
-                      Divider(),
-                    ],
-                  ),
+            // 2. حالة الخطأ أو فشل التوكن
+            if (snapshot.hasError || (snapshot.data != null && snapshot.data!["success"] == false)) {
+              return Center(child: Text("Failed to load profile data"));
+            }
 
-                  SizedBox(height: 30),
+            // 3. البيانات وصلت بالسلامة
+            final userData = snapshot.data!["data"];
 
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "PASSWORD",
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
-                      ),
-                      SizedBox(height: 4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "*************",
-                            style: TextStyle(color: Colors.black, fontSize: 18),
-                          ),
-                          TextButton(
-                            onPressed: () {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 40),
+                    
+                    // Full Name Section
+                    _buildInfoSection("FULL NAME", userData["fullName"] ?? "Not Provided"),
+                    
+                    SizedBox(height: 30),
 
-                                Navigator.pushNamed(context, "/changepassword");
+                    // Email Section
+                    _buildInfoSection("EMAIL ADDRESS", userData["email"] ?? "Not Provided"),
 
-                            },
-                            child: Text(
-                              "Change",
-                              style: TextStyle(
-                                color: const Color.fromARGB(255, 147, 24, 24),
-                                fontSize: 18,
-                              ),
+                    SizedBox(height: 30),
+
+                    // Phone Section
+                    _buildInfoSection("PHONE NUMBER", userData["phone"] ?? "Not Provided"),
+
+                    SizedBox(height: 30),
+
+                    // Password Section
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("PASSWORD", style: TextStyle(color: Colors.grey, fontSize: 16)),
+                        SizedBox(height: 4),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("*************", style: TextStyle(color: Colors.black, fontSize: 18)),
+                            TextButton(
+                              onPressed: () => Navigator.pushNamed(context, "/changepassword"),
+                              child: Text("Change", style: TextStyle(color: Color.fromARGB(255, 147, 24, 24), fontSize: 18)),
                             ),
-                          ),
-                        ],
-                      ),
-                      Divider(),
-                      SizedBox(height: 60,),
-
-                      Container(
-                    padding: EdgeInsets.only(right: 10),
-                    height: 40,
-                    width: 400,
-                    child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.circular(15),
+                          ],
                         ),
-                        backgroundColor: const Color.fromARGB(255, 147, 24, 24),
-                      ),
-                      onPressed: () {},
+                        Divider(),
+                      ],
+                    ),
+                    
+                    SizedBox(height: 60),
 
-                      label: Text(
-                        "Change Password" ,
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 147, 24, 24),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        ),
+                        onPressed: ()  {
+                        
+                        },
+                        label: Text("Change settings", style: TextStyle(fontSize: 20, color: Colors.white)),
                       ),
                     ),
-                  ),
-                
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
+    );
+  }
+
+  Widget _buildInfoSection(String title, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: TextStyle(color: Colors.grey, fontSize: 16)),
+        SizedBox(height: 4),
+        Text(value, style: TextStyle(color: Colors.black, fontSize: 18)),
+        Divider(),
+      ],
     );
   }
 }
