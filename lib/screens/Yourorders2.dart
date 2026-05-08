@@ -37,13 +37,13 @@ class _YourOrders2State extends State<YourOrders2> {
       );
 
       if (response.statusCode == 201) {
-        print('تمت الإضافة بنجاح: ${response.body}');
+        print('added successfully: ${response.body}');
       } else {
-        print('فشل الطلب بكود: ${response.statusCode}');
-        print('الرسالة: ${response.body}');
+        print('failed to add payment method with status code: ${response.statusCode}');
+        print('message: ${response.body}');
       }
     } catch (e) {
-      print('حدث خطأ أثناء الاتصال: $e');
+      print('error occurred while connecting: $e');
     }
   }
 
