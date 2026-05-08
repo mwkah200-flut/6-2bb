@@ -49,7 +49,6 @@ class Number extends StatelessWidget {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            // color: Colors.purple[100],
                             borderRadius: BorderRadius.circular(66),
                           ),
                           width: double.infinity,

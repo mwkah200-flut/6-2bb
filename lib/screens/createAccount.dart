@@ -75,7 +75,6 @@ class _CreateaccountState extends State<Createaccount> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              // color: Colors.purple[100],
                               borderRadius: BorderRadius.circular(66),
                             ),
                             width: double.infinity,
@@ -99,7 +98,6 @@ class _CreateaccountState extends State<Createaccount> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                    // color: Colors.purple[100],
                                     borderRadius: BorderRadius.circular(66),
                                   ),
                                   width: double.infinity,
@@ -150,7 +148,6 @@ class _CreateaccountState extends State<Createaccount> {
 
                                 Container(
                                   decoration: BoxDecoration(
-                                    // color: Colors.purple[100],
                                     borderRadius: BorderRadius.circular(66),
                                   ),
                                   width: double.infinity,
@@ -276,86 +273,9 @@ class _CreateaccountState extends State<Createaccount> {
 
                                 SizedBox(height: 10),
 
-                                Center(
-                                  child: Text(
-                                    "Or",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                  padding: EdgeInsets.only(right: 10),
-                                  height: 40,
-                                  width: 400,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadiusGeometry.circular(15),
-                                      ),
-                                      backgroundColor: const Color(0xFF3B5998),
-                                    ),
-                                    onPressed: () {},
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.facebook,
-                                          color: Colors.white,
-                                          size: 30,
-                                        ),
-                                        SizedBox(width: 30),
-                                        Text(
-                                          "Connect with facebook",
-                                          style: TextStyle(
-                                            fontSize: 25,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                  padding: EdgeInsets.only(right: 10),
-                                  height: 40,
-                                  width: 400,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadiusGeometry.circular(15),
-                                      ),
-                                      backgroundColor: const Color(0xFF4285F4),
-                                    ),
-                                    onPressed: () {},
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.all(3),
-                                          height: 28,
-                                          width: 28,
-
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.white,
-                                          ),
-                                          child: SvgPicture.asset(
-                                            "assets/images/google-color-svgrepo-com.svg",
-                                          ),
-                                        ),
-                                        SizedBox(width: 30),
-                                        Text(
-                                          "Connect with Google",
-                                          style: TextStyle(
-                                            fontSize: 25,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                      
+                              
+                              
                               ],
                             ),
                           ),

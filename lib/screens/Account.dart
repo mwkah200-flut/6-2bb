@@ -41,14 +41,14 @@ class _AccountState extends State<Account> {
                           ),
                         ),
                         SizedBox(height: 20),
-              
+
                         Text(
                           "Update your settings like notification , payments , profile edit etc",
                           style: TextStyle(fontSize: 16),
                         ),
-              
+
                         SizedBox(height: 20),
-              
+
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(context, "/profileinfo");
@@ -69,10 +69,15 @@ class _AccountState extends State<Account> {
                             "change your password",
                           ),
                         ),
-                        _row(
-                          Icons.payment,
-                          "Payment methods",
-                          "Add your credit & debit",
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/Paymentmethods");
+                          },
+                          child: _row(
+                            Icons.payment,
+                            "Payment methods",
+                            "Add your credit & debit",
+                          ),
                         ),
                         _row(
                           Icons.location_on,
@@ -89,9 +94,9 @@ class _AccountState extends State<Account> {
                           "refer to friends",
                           "Get 10 \$ for reffering friends",
                         ),
-              
+
                         SizedBox(height: 20),
-              
+
                         Text(
                           "Notifications",
                           style: TextStyle(
@@ -99,9 +104,9 @@ class _AccountState extends State<Account> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-              
+
                         SizedBox(height: 15),
-              
+
                         _row2(
                           "Push Notification",
                           "For daily update you will get it",
@@ -112,7 +117,7 @@ class _AccountState extends State<Account> {
                             });
                           },
                         ),
-              
+
                         _row2(
                           "SMS notifications",
                           "For daily update you will get it",
@@ -123,7 +128,7 @@ class _AccountState extends State<Account> {
                             });
                           },
                         ),
-              
+
                         _row2(
                           "Promotional Notification",
                           "For daily update you will get it",
@@ -134,9 +139,9 @@ class _AccountState extends State<Account> {
                             });
                           },
                         ),
-              
+
                         SizedBox(height: 20),
-              
+
                         Text(
                           "More",
                           style: TextStyle(
@@ -144,7 +149,7 @@ class _AccountState extends State<Account> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-              
+
                         _row(
                           Icons.star,
                           "Rate us",
@@ -155,13 +160,13 @@ class _AccountState extends State<Account> {
                           "FAQ",
                           "Frequently asked questions",
                         ),
-              
+
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: InkWell(
                             onTap: () async {
                               bool success = await ApiService.logout();
-              
+
                               if (success) {
                                 Navigator.pushNamedAndRemoveUntil(
                                   context,
@@ -177,8 +182,7 @@ class _AccountState extends State<Account> {
                                 );
                               }
                             },
-                            
-                            
+
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -241,7 +245,9 @@ class _AccountState extends State<Account> {
                   Column(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/Yourorders2");
+                        },
                         icon: Icon(Icons.receipt_long, size: 30),
                       ),
                       Text(

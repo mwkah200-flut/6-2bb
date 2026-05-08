@@ -72,57 +72,55 @@ class _PinState extends State<Pin> {
                       backgroundColor: const Color.fromARGB(255, 147, 24, 24),
                     ),
                     onPressed: isLoading
-                        ? null
-                        : () async {
-                            if (codeController.text.length < 6) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    "Please enter the 6-digit code",
-                                  ),
-                                ),
-                              );
-                              return;
-                            }
+    ? null
+    : () async {
+        if (codeController.text.length < 6) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Please enter the 6-digit code"),
+            ),
+          );
+          return;
+        }
 
-                            setState(() => isLoading = true);
+        setState(() => isLoading = true);
 
-                            var response = await ApiService.verifyPhone(
-                              codeController.text,
-                              token,
-                            );
+        var response = await ApiService.verifyPhone(
+          codeController.text,
+          token,
+        );
 
-                            setState(() => isLoading = false);
+        setState(() => isLoading = false);
 
-                            print("✅ Verify Response: $response");
+        print("✅ Verify Response: $response");
 
-                            if (response['success'] == true) {
-                              if (mounted) {
-                                Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  "/homepage",
-                                  (route) => false,
-                                );
-                              }
-                            } else {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                "/homepage",
-                                (route) => false,
-                              );
-                              String msg =
-                                  response['error']?['message'] ??
-                                  "Verification Failed";
-                              if (mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(msg),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              }
-                            }
-                          },
+        if (response['success'] == true) {
+          if (!mounted) return;
+
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            "/homepage",
+            (route) => false,
+          );
+        } else {
+           Navigator.pushNamedAndRemoveUntil(
+            context,
+            "/homepage",
+            (route) => false,
+          );
+          String msg =
+              response['error']?['message'] ?? "Verification Failed";
+
+          if (!mounted) return;
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(msg),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      },
                     child: isLoading
                         ? CircularProgressIndicator(color: Colors.white)
                         : Text(

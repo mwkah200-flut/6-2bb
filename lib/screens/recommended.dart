@@ -41,20 +41,39 @@ class _RecommendedState extends State<Recommended> {
   }
 
   Future<void> getRecommended() async {
-    final result = await ApiService.getAllRestaurants();
-    print(result);
-    if (result["success"] == true) {
+  final result = await ApiService.getAllRestaurants();
+
+  print("RECOMMENDED RESULT: $result");
+
+  if (result["success"] == true) {
+    var data = result["data"];
+
+    List apiList = [];
+
+    if (data is List) {
+      apiList = data;
+    } else if (data is Map && data["items"] != null) {
+      apiList = data["items"];
+    }
+
+    if (apiList.isNotEmpty) {
       setState(() {
-        restaurants = result["data"]["items"] ?? [];
+        restaurants = apiList; 
         isLoading = false;
       });
     } else {
+      print("⚠️ API فاضي → هنستخدم dummy recommended");
       setState(() {
         isLoading = false;
       });
     }
+  } else {
+    print("❌ API Error");
+    setState(() {
+      isLoading = false;
+    });
   }
-
+}
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -36,7 +36,6 @@ class Mcdonalds extends StatelessWidget {
             SizedBox(
               width: 400,
               height: 300,
-              // color: Colors.blue,
               child: Stack(
                 children: [
                   Align(

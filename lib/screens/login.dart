@@ -5,7 +5,7 @@ import 'package:flutter_application_1/services/storage_service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Login extends StatefulWidget {
-  Login({super.key});
+  const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -134,30 +134,48 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                               onPressed: () async {
+                                if (EmailController.text.isEmpty ||
+                                    passwordController.text.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        "Please enter email and password",
+                                      ),
+                                    ),
+                                  );
+                                  return;
+                                }
+
                                 print("Attempting Login...");
-
-                                var response = await ApiService.login(
-                                  EmailController.text,
-                                  passwordController.text,
-                                );
-
-                                if (response["success"] == true) {
-                                  print("✅ Login Success!");
-
-                                  var data = response["data"];
-                                  String token = data["accessToken"];
-                                  String refreshToken =
-                                      data["refreshToken"] ?? "";
-
-                                  await StorageService.saveToken(token);
-                                  await StorageService.saveRefreshToken(
-                                    refreshToken,
+                                try {
+                                  var response = await ApiService.login(
+                                    EmailController.text.trim(),
+                                    passwordController.text.trim(),
+                                  );
+                                  print("FULL LOGIN RESPONSE: $response");
+                                  print(
+                                    "USER DATA: ${response["data"]?["user"]}",
                                   );
 
-                                  bool isVerified =
-                                      data["user"]["isVerified"] ?? false;
+                                  if (response["success"] == true) {
+                                    print("✅ Login Success!");
 
-                                  if (context.mounted) {
+                                    var data = response["data"];
+                                    String token = data["accessToken"] ?? "";
+                                    String refreshToken =
+                                        data["refreshToken"] ?? "";
+
+                                    await StorageService.saveToken(token);
+                                    await StorageService.saveRefreshToken(
+                                      refreshToken,
+                                    );
+
+                                    bool isVerified =
+                                        data["user"]?["isPhoneVerified"] ??
+                                        false;
+
+                                    if (!context.mounted) return;
+
                                     if (isVerified) {
                                       Navigator.pushNamedAndRemoveUntil(
                                         context,
@@ -169,15 +187,16 @@ class _LoginState extends State<Login> {
                                         context,
                                         "/pin",
                                         arguments: {
-                                          "phoneNumber": EmailController.text,
+                                          "phone": data["user"]?["phone"],
                                           "token": token,
                                         },
                                       );
                                     }
-                                  }
-                                } else {
-                                  print("❌ Login Failed");
-                                  if (context.mounted) {
+                                  } else {
+                                    print("❌ Login Failed");
+
+                                    if (!context.mounted) return;
+
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -187,6 +206,18 @@ class _LoginState extends State<Login> {
                                       ),
                                     );
                                   }
+                                } catch (e) {
+                                  print("🔥 ERROR: $e");
+
+                                  if (!context.mounted) return;
+
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        "Something went wrong, try again",
+                                      ),
+                                    ),
+                                  );
                                 }
                               },
                               label: Text(
@@ -199,84 +230,8 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Center(
-                            child: Text("Or", style: TextStyle(fontSize: 20)),
-                          ),
-                          SizedBox(height: 10),
-                          Container(
-                            padding: EdgeInsets.only(right: 10),
-                            height: 40,
-                            width: 400,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadiusGeometry.circular(
-                                    15,
-                                  ),
-                                ),
-                                backgroundColor: const Color(0xFF3B5998),
-                              ),
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.facebook,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  SizedBox(width: 30),
-                                  Text(
-                                    "Connect with facebook",
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Container(
-                            padding: EdgeInsets.only(right: 10),
-                            height: 40,
-                            width: 400,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadiusGeometry.circular(
-                                    15,
-                                  ),
-                                ),
-                                backgroundColor: const Color(0xFF4285F4),
-                              ),
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(3),
-                                    height: 28,
-                                    width: 28,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                    ),
-                                    child: SvgPicture.asset(
-                                      "assets/images/google-color-svgrepo-com.svg",
-                                    ),
-                                  ),
-                                  SizedBox(width: 30),
-                                  Text(
-                                    "Connect with Google",
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                         
+                       
                         ],
                       ),
                     ),

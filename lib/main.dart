@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/Account.dart';
+import 'package:flutter_application_1/screens/Paymentmethods.dart';
 import 'package:flutter_application_1/screens/Resetsent.dart';
 import 'package:flutter_application_1/screens/Welcome.dart';
+import 'package:flutter_application_1/screens/Yourorders2.dart';
 import 'package:flutter_application_1/screens/addcard.dart';
 import 'package:flutter_application_1/screens/changepassword.dart';
 import 'package:flutter_application_1/screens/createAccount.dart';
@@ -33,21 +35,23 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const SplashScreen(),
         "/login": (context) =>  Login(),
-        "/Welcome": (context) =>  Welcome(),
+        "/Welcome": (context) =>  const Welcome(),
         "/forgotpassword": (context) => const Forgotpassword(),
         "/Resetsent": (context) => const Resetsent(),
-        "/createAccount": (context) =>  Createaccount(),
+        "/createAccount": (context) =>  const Createaccount(),
         "/number": (context) => Number(),
         "/pin": (context) =>  const Pin(phonenumber: ""),
         "/homepage": (context) => const Homepage(),
         "/search": (context) => const Search(),
-        "/recommended": (context) =>  Recommended(),
+        "/recommended": (context) =>  const Recommended(),
         "/addcard": (context) => const AddCard(),
-        "/yourorders": (context) =>  YourOrders(),
+        "/yourorders": (context) =>  const YourOrders(),
+        "/Yourorders2": (context) =>  const YourOrders2(),
         "/mcdonalds": (context) => const Mcdonalds(),
         "/Account": (context) => const Account(),
-        "/profileinfo": (context) => Profileinfo(),
-        "/changepassword": (context) => Changepssword(),
+        "/profileinfo": (context) => const Profileinfo(),
+        "/changepassword": (context) => const Changepssword(),
+        "/Paymentmethods": (context) =>  PaymentMethodsPage(),
       },
     );
   }

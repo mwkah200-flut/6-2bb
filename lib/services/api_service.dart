@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/services/storage_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
   static const String baseUrl = "http://10.0.2.2:3000/api/v1";
@@ -62,13 +63,12 @@ class ApiService {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        // تحديث الـ Access Token الجديد فقط
         await StorageService.saveToken(data['accessToken']);
         print("✅ Access Token Refreshed Successfully");
         return true;
       } else {
         print("❌ Refresh Token Expired or Invalid");
-        await StorageService.clearAll(); 
+        await StorageService.clearAll();
         return false;
       }
     } catch (e) {
@@ -92,10 +92,12 @@ class ApiService {
       final data = jsonDecode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        if (data['accessToken'] != null)
+        if (data['accessToken'] != null) {
           await StorageService.saveToken(data['accessToken']);
-        if (data['refreshToken'] != null)
+        }
+        if (data['refreshToken'] != null) {
           await StorageService.saveRefreshToken(data['refreshToken']);
+        }
       }
 
       return data;
@@ -197,7 +199,7 @@ class ApiService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token', 
+          'Authorization': 'Bearer $token',
         },
       );
 
@@ -244,8 +246,9 @@ class ApiService {
 
     if (categoryId != null) queryParameters['categoryId'] = categoryId;
     if (rating != null) queryParameters['rating'] = rating.toString();
-    if (maxDeliveryFee != null)
+    if (maxDeliveryFee != null) {
       queryParameters['maxDeliveryFee'] = maxDeliveryFee.toString();
+    }
     if (minOrder != null) queryParameters['minOrder'] = minOrder.toString();
     if (search != null) queryParameters['search'] = search;
 
@@ -273,120 +276,234 @@ class ApiService {
     }
   }
 
-static Future<Map<String, dynamic>> getCategories() async {
-  final url = Uri.parse('$baseUrl/restaurants/categories');
+  static Future<Map<String, dynamic>> getCategories() async {
+    final url = Uri.parse('$baseUrl/restaurants/categories');
 
-  String? token = await StorageService.getToken();
+    String? token = await StorageService.getToken();
 
-  final response = await http.get(
-    url,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      if (token != null) 'Authorization': 'Bearer $token',
-    },
-  );
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        if (token != null) 'Authorization': 'Bearer $token',
+      },
+    );
 
-  final data = jsonDecode(response.body);
-
-  if (response.statusCode == 200) {
-    return {
-      "success": true,
-      "data": data["data"] ?? data,
-    };
-  } else {
-    return {
-      "success": false,
-      "message": data["message"] ?? "Error",
-    };
-  }
-}
-
-static Future<Map<String, dynamic>> getRecommendedRestaurants({
-  int limit = 10,
-}) async {
-  final url = Uri.parse(
-    '$baseUrl/restaurants/recommended?limit=$limit',
-  );
-
-  String? token = await StorageService.getToken();
-
-  final response = await http.get(
-    url,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      if (token != null) 'Authorization': 'Bearer $token',
-    },
-  );
-
-  final data = jsonDecode(response.body);
-
-  if (response.statusCode == 200) {
-    return {
-      "success": true,
-      "data": data["data"] ?? data,
-    };
-  } else {
-    return {
-      "success": false,
-      "message": data["message"] ?? "Error",
-    };
-  }
-}
-
-
-
-static Future<Map<String, dynamic>> getRestaurantById(String id) async {
-  final url = Uri.parse('$baseUrl/restaurants/$id');
-
-  String? token = await StorageService.getToken();
-
-  final response = await http.get(
-    url,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      if (token != null) 'Authorization': 'Bearer $token',
-    },
-  );
-
-  if (response.statusCode == 200) {
     final data = jsonDecode(response.body);
-    print("RESTAURANT DETAILS: $data"); 
+
+    if (response.statusCode == 200) {
+      return {"success": true, "data": data["data"] ?? data};
+    } else {
+      return {"success": false, "message": data["message"] ?? "Error"};
+    }
+  }
+
+  static Future<Map<String, dynamic>> getRecommendedRestaurants({
+    int limit = 10,
+  }) async {
+    final url = Uri.parse('$baseUrl/restaurants/recommended?limit=$limit');
+
+    String? token = await StorageService.getToken();
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        if (token != null) 'Authorization': 'Bearer $token',
+      },
+    );
+
+    final data = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      return {"success": true, "data": data["data"] ?? data};
+    } else {
+      return {"success": false, "message": data["message"] ?? "Error"};
+    }
+  }
+
+  static Future<Map<String, dynamic>> getRestaurantById(String id) async {
+    final url = Uri.parse('$baseUrl/restaurants/$id');
+
+    String? token = await StorageService.getToken();
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        if (token != null) 'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print("RESTAURANT DETAILS: $data");
+      return data;
+    } else {
+      print("ERROR: ${response.body}");
+      return {"success": false};
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateCartItem(
+    String id,
+    int quantity,
+    String? specialInstructions,
+  ) async {
+    final url = Uri.parse('$baseUrl/cart/items/$id');
+
+    String? token = await StorageService.getToken();
+
+    final response = await http.patch(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        if (token != null) 'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({
+        "quantity": quantity,
+        "specialInstructions": specialInstructions ?? "",
+      }),
+    );
+
+    final data = jsonDecode(response.body);
+
     return data;
-  } else {
-    print("ERROR: ${response.body}");
-    return {"success": false};
+  }
+
+
+static Future<Map<String, dynamic>> addPaymentMethod({
+  required String cardNumber,
+  required int expiryMonth,
+  required int expiryYear,
+  required String cvv,
+}) async {
+  final url = Uri.parse('$baseUrl/payment-methods');
+  
+  String? token = await StorageService.getToken(); 
+
+  try {
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token', 
+      },
+      body: jsonEncode({
+        "type": "CREDIT_CARD",
+        "cardNumber": cardNumber,
+        "expiryMonth": expiryMonth,
+        "expiryYear": expiryYear,
+        "cvv": cvv,
+      }),
+    );
+
+    return jsonDecode(response.body);
+  } catch (e) {
+    return {"success": false, "message": "Connection Error"};
   }
 }
-static Future<Map<String, dynamic>> updateCartItem(
-  String id,
-  int quantity,
-  String? specialInstructions,
-) async {
-  final url = Uri.parse('$baseUrl/cart/items/$id');
+  static Future<Map<String, dynamic>> search({
+    required String query,
+    int page = 1,
+    int limit = 10,
+  }) async {
+    final url = Uri.parse('$baseUrl/search').replace(
+      queryParameters: {
+        'query': query,
+        'page': page.toString(),
+        'limit': limit.toString(),
+      },
+    );
 
-  String? token = await StorageService.getToken();
+    String? token = await StorageService.getToken();
 
-  final response = await http.patch(
-    url,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      if (token != null) 'Authorization': 'Bearer $token',
-    },
-    body: jsonEncode({
-      "quantity": quantity,
-      "specialInstructions": specialInstructions ?? "",
-    }),
-  );
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          if (token != null) 'Authorization': 'Bearer $token',
+        },
+      );
 
-  final data = jsonDecode(response.body);
+      final data = jsonDecode(response.body);
 
-  return data;
+      if (response.statusCode == 200) {
+        return {"success": true, "data": data["data"] ?? data};
+      } else {
+        return {
+          "success": false,
+          "message": data["message"] ?? "Search failed",
+        };
+      }
+    } catch (e) {
+      return {"success": false, "message": "Connection Error: $e"};
+    }
+  }
+
+  static Future<Map<String, dynamic>> getPaymentMethods() async {
+    final url = Uri.parse('$baseUrl/payment-methods');
+
+    String? token = await StorageService.getToken();
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          if (token != null) 'Authorization': 'Bearer $token',
+        },
+      );
+
+      final data = jsonDecode(response.body);
+
+      print("PAYMENT METHODS: $data");
+
+      if (response.statusCode == 200) {
+        return {"success": true, "data": data["data"] ?? data};
+      } else {
+        return {"success": false, "message": data["message"] ?? "Error"};
+      }
+    } catch (e) {
+      print("PAYMENT METHODS ERROR: $e");
+
+      return {"success": false, "message": "Connection Error"};
+    }
+  }
+
+  static Future<Map<String, dynamic>> deletePaymentMethod(
+    String id,
+    String token,
+  ) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$baseUrl/payment-methods/$id'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        return {"success": true};
+      } else {
+        final data = json.decode(response.body);
+        return {
+          "success": false,
+          "message": data["message"] ?? "Error deleting card",
+        };
+      }
+    } catch (e) {
+      print("DELETE CARD ERROR: $e");
+      return {"success": false, "message": "Connection Error: $e"};
+    }
+  }
 }
-}
-
-
-

@@ -7,14 +7,14 @@ import 'package:flutter_application_1/screens/resturantname.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class YourOrders extends StatefulWidget {
-  const YourOrders({super.key});
+class YourOrders2 extends StatefulWidget {
+  const YourOrders2({super.key});
 
   @override
-  State<YourOrders> createState() => _YourOrdersState();
+  State<YourOrders2> createState() => _YourOrders2State();
 }
 
-class _YourOrdersState extends State<YourOrders> {
+class _YourOrders2State extends State<YourOrders2> {
   double get subtotal {
     return CartData.items.fold(
       0,
@@ -169,37 +169,7 @@ class _YourOrdersState extends State<YourOrders> {
 
                         const SizedBox(height: 20),
 
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(
-                                255,
-                                147,
-                                24,
-                                24,
-                              ),
-                            ),
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  backgroundColor: Colors.green,
-                                  content: Text("Order Placed 🚀"),
-                                ),
-                              );
-                              Navigator.pushNamed(
-                                context,
-                                "/addcard",
-                                arguments: total,
-                              );
-                            },
-                            child: const Text(
-                              "Checkout",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
+                        
                       ],
                     ),
                   ),

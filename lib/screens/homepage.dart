@@ -25,7 +25,6 @@ class _HomepageState extends State<Homepage> {
     {"name": "Pizza"},
     {"name": "Burger"},
     {"name": "Sushi"},
-    {"name": "shahd"},
   ];
   List recommended = [
     {
@@ -49,8 +48,6 @@ class _HomepageState extends State<Homepage> {
       "rate": "4.2",
       "about": "Lorem ipsum dolor sit amet",
     },
-
-    
   ];
   bool isLoading = true;
 
@@ -67,10 +64,24 @@ class _HomepageState extends State<Homepage> {
 
     print("FULL RESULT: $result");
 
-    if (result["success"]) {
-      restaurants = result["data"]["items"] ?? [];
+    if (result["success"] == true) {
+      var data = result["data"];
+
+      if (data is List && data.isNotEmpty) {
+        setState(() {
+          restaurants = data;
+        });
+      } else if (data is Map &&
+          data["items"] != null &&
+          data["items"].isNotEmpty) {
+        setState(() {
+          restaurants = data["items"];
+        });
+      } else {
+        print("⚠️ No restaurants from API, using dummy data");
+      }
     } else {
-      print(result["message"]);
+      print("❌ API Error: ${result["message"]}");
     }
 
     setState(() {
@@ -79,24 +90,54 @@ class _HomepageState extends State<Homepage> {
   }
 
   Future<void> fetchCategories() async {
-    final result = await ApiService.getCategories();
+  final result = await ApiService.getCategories();
 
-    if (result["success"]) {
-      categories = result["data"];
-    } else {
-      print(result["message"]);
+  print("CATEGORIES RAW: $result");
+
+  if (result["success"] == true) {
+    var data = result["data"];
+
+    if (data is List && data.isNotEmpty) {
+      setState(() {
+        categories = data;
+      });
+    } 
+    else if (data is Map &&
+        data["items"] != null &&
+        data["items"].isNotEmpty) {
+      setState(() {
+        categories = data["items"];
+      });
+    } 
+    else if (data is Map &&
+        data["data"] != null &&
+        data["data"].isNotEmpty) {
+      setState(() {
+        categories = data["data"];
+      });
+    } 
+    else {
+      print("⚠️ No categories from API, using dummy data");
     }
-
-    setState(() {});
+  } else {
+    print("❌ Categories Error: ${result["message"]}");
   }
-
+}
   Future<void> fetchRecommended() async {
     final result = await ApiService.getRecommendedRestaurants(limit: 10);
 
-    if (result["success"]) {
-      recommended = result["data"];
+    if (result["success"] == true) {
+      var data = result["data"];
+
+      if (data != null && data.isNotEmpty) {
+        setState(() {
+          recommended = data;
+        });
+      } else {
+        print("⚠️ No recommended → using dummy");
+      }
     } else {
-      print(result["message"]);
+      print("❌ Recommended Error: ${result["message"]}");
     }
 
     setState(() {});
@@ -181,7 +222,7 @@ class _HomepageState extends State<Homepage> {
                           color: Color.fromARGB(255, 147, 24, 24),
                           fontSize: 15,
                         ),
-                      ), 
+                      ),
 
                       Container(
                         padding: const EdgeInsets.only(right: 10),
@@ -210,7 +251,6 @@ class _HomepageState extends State<Homepage> {
 
                       const SizedBox(height: 50),
 
-                      
                       Container(
                         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         padding: const EdgeInsets.fromLTRB(130, 0, 130, 0),
@@ -596,7 +636,9 @@ class _HomepageState extends State<Homepage> {
                   Column(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/Yourorders2");
+                        },
                         icon: const Icon(Icons.receipt_long),
                       ),
                       const Text("Orders"),
