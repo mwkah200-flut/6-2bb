@@ -103,11 +103,7 @@ class _PinState extends State<Pin> {
             (route) => false,
           );
         } else {
-           Navigator.pushNamedAndRemoveUntil(
-            context,
-            "/homepage",
-            (route) => false,
-          );
+          
           String msg =
               response['error']?['message'] ?? "Verification Failed";
 
