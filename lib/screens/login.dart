@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/api_service.dart';
 import 'package:flutter_application_1/services/storage_service.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -133,93 +134,83 @@ class _LoginState extends State<Login> {
                                   24,
                                 ),
                               ),
-                              onPressed: () async {
-                                if (EmailController.text.isEmpty ||
-                                    passwordController.text.isEmpty) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        "Please enter email and password",
-                                      ),
-                                    ),
-                                  );
-                                  return;
-                                }
+                             onPressed: () async {
+  if (EmailController.text.isEmpty ||
+      passwordController.text.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Please enter email and password"),
+      ),
+    );
+    return;
+  }
 
-                                print("Attempting Login...");
-                                try {
-                                  var response = await ApiService.login(
-                                    EmailController.text.trim(),
-                                    passwordController.text.trim(),
-                                  );
-                                  print("FULL LOGIN RESPONSE: $response");
-                                  print(
-                                    "USER DATA: ${response["data"]?["user"]}",
-                                  );
+  try {
+    var response = await ApiService.login(
+      EmailController.text.trim(),
+      passwordController.text.trim(),
+    );
 
-                                  if (response["success"] == true) {
-                                    print("✅ Login Success!");
+    print("LOGIN RESPONSE: $response");
+    print(jsonEncode(response));
 
-                                    var data = response["data"];
-                                    String token = data["accessToken"] ?? "";
-                                    String refreshToken =
-                                        data["refreshToken"] ?? "";
+    if (response["success"] == true) {
 
-                                    await StorageService.saveToken(token);
-                                    await StorageService.saveRefreshToken(
-                                      refreshToken,
-                                    );
+      final data = response["data"];
 
-                                    bool isVerified =
-                                        data["user"]?["isPhoneVerified"] ??
-                                        false;
+      if (data["requiresOtp"] == true) {
 
-                                    if (!context.mounted) return;
+        if (!context.mounted) return;
 
-                                    if (isVerified) {
-                                      Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        "/homepage",
-                                        (route) => false,
-                                      );
-                                    } else {
-                                      Navigator.pushNamed(
-                                        context,
-                                        "/pin",
-                                        arguments: {
-                                          "phone": data["user"]?["phone"],
-                                          "token": token,
-                                        },
-                                      );
-                                    }
-                                  } else {
-                                    print("❌ Login Failed");
+        Navigator.pushNamed(
+          context,
+          "/pin",
+          arguments: {
+            "userId": data["userId"],
+          },
+        );
 
-                                    if (!context.mounted) return;
+      } else {
 
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          response["message"] ??
-                                              "Wrong email or password",
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                } catch (e) {
-                                  print("🔥 ERROR: $e");
+        final String token = data["accessToken"] ?? "";
+        final String refreshToken = data["refreshToken"] ?? "";
 
-                                  if (!context.mounted) return;
+        await StorageService.saveToken(token);
+        await StorageService.saveRefreshToken(refreshToken);
 
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        "Something went wrong, try again",
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
+        if (!context.mounted) return;
+
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          "/homepage",
+          (route) => false,
+        );
+      }
+
+    } else {
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            response["message"] ?? "Invalid email/phone or password",
+          ),
+        ),
+      );
+
+    }
+
+  } catch (e) {
+
+    print("LOGIN ERROR: $e");
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Something went wrong: $e"),
+      ),
+    );
+
+  }
+},
                               label: Text(
                                 "Login ",
                                 style: TextStyle(
@@ -230,8 +221,6 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           SizedBox(height: 10),
-                         
-                       
                         ],
                       ),
                     ),

@@ -9,6 +9,7 @@ import 'package:flutter_application_1/screens/changepassword.dart';
 import 'package:flutter_application_1/screens/createAccount.dart';
 import 'package:flutter_application_1/screens/forgotpassword.dart';
 import 'package:flutter_application_1/screens/homepage.dart';
+import 'package:flutter_application_1/screens/locations.dart';
 import 'package:flutter_application_1/screens/login.dart';
 import 'package:flutter_application_1/screens/mcdonalds.dart';
 import 'package:flutter_application_1/screens/number.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         "/profileinfo": (context) => const Profileinfo(),
         "/changepassword": (context) => const Changepssword(),
         "/Paymentmethods": (context) =>  PaymentMethodsPage(),
+        "/locations": (context) =>  SavedLocationsPage(),
       },
     );
   }

@@ -47,6 +47,145 @@ class ApiService {
     }
   }
 
+  static Future<Map<String, dynamic>> verifyLoginOtp(
+    String code,
+    String userId,
+  ) async {
+    final url = Uri.parse('$baseUrl/auth/verify-login-otp');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({"code": code, "userId": userId}),
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (data["data"]["accessToken"] != null) {
+          await StorageService.saveToken(data["data"]["accessToken"]);
+        }
+
+        if (data["data"]["refreshToken"] != null) {
+          await StorageService.saveRefreshToken(data["data"]["refreshToken"]);
+        }
+
+        return {"success": true, "data": data};
+      } else {
+        return {
+          "success": false,
+          "message": data["message"] ?? "Verification failed",
+        };
+      }
+    } catch (e) {
+      return {"success": false, "message": "Connection Error: $e"};
+    }
+  }
+
+  static Future<Map<String, dynamic>> addLocation({
+    required String label,
+    required String address,
+    required String apartment,
+    required String floor,
+    required String building,
+    required String landmark,
+    required double latitude,
+    required double longitude,
+    required bool isDefault,
+  }) async {
+    final url = Uri.parse('$baseUrl/locations');
+
+    String? token = await StorageService.getToken();
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          "label": label,
+          "address": address,
+          "apartment": apartment,
+          "floor": floor,
+          "building": building,
+          "landmark": landmark,
+          "latitude": latitude,
+          "longitude": longitude,
+          "isDefault": isDefault,
+        }),
+      );
+
+      final data = jsonDecode(response.body);
+
+      print("ADD LOCATION RESPONSE: $data");
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return {"success": true, "data": data};
+      } else {
+        return {
+          "success": false,
+          "message": data["message"] ?? "Failed to add location",
+        };
+      }
+    } catch (e) {
+      print("ADD LOCATION ERROR: $e");
+
+      return {"success": false, "message": "Connection Error"};
+    }
+  }
+static Future<Map<String, dynamic>> deleteLocation(
+  String id,
+) async {
+
+  final url = Uri.parse('$baseUrl/locations/$id');
+
+  String? token = await StorageService.getToken();
+
+  try {
+
+    final response = await http.delete(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    final data = jsonDecode(response.body);
+
+    print("DELETE LOCATION RESPONSE: $data");
+
+    if (response.statusCode == 200) {
+
+      return {
+        "success": true,
+      };
+
+    } else {
+
+      return {
+        "success": false,
+        "message": data["message"] ?? "Failed to delete location",
+      };
+
+    }
+
+  } catch (e) {
+
+    print("DELETE LOCATION ERROR: $e");
+
+    return {
+      "success": false,
+      "message": "Connection Error",
+    };
+
+  }
+}
   static Future<bool> refreshTokenLogic() async {
     final url = Uri.parse('$baseUrl/auth/refresh');
     String? refreshToken = await StorageService.getRefreshToken();
@@ -75,7 +214,54 @@ class ApiService {
       return false;
     }
   }
+static Future<Map<String, dynamic>> getLocations() async {
 
+  final url = Uri.parse('$baseUrl/locations');
+
+  String? token = await StorageService.getToken();
+
+  try {
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    final data = jsonDecode(response.body);
+
+    print("GET LOCATIONS RESPONSE: $data");
+
+    if (response.statusCode == 200) {
+
+      return {
+        "success": true,
+        "data": data["data"] ?? [],
+      };
+
+    } else {
+
+      return {
+        "success": false,
+        "message": data["message"] ?? "Failed",
+      };
+
+    }
+
+  } catch (e) {
+
+    print("GET LOCATIONS ERROR: $e");
+
+    return {
+      "success": false,
+      "message": "Connection Error",
+    };
+
+  }
+}
   static Future<Map<String, dynamic>> login(
     String emailorphone,
     String password,
@@ -142,11 +328,11 @@ class ApiService {
     }
   }
 
-  static Future<Map<String, dynamic>> verifyPhone(
-    String code,
-    String token,
-  ) async {
+  static Future<Map<String, dynamic>> verifyPhone(String code) async {
     final url = Uri.parse('$baseUrl/auth/verify-phone');
+
+    String? token = await StorageService.getToken();
+
     try {
       final response = await http.post(
         url,
@@ -154,8 +340,9 @@ class ApiService {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
-        body: jsonEncode({"code": code.toString().trim()}),
+        body: jsonEncode({"code": code.trim()}),
       );
+
       return jsonDecode(response.body);
     } catch (e) {
       return {"success": false, "message": "Connection Error"};
@@ -374,39 +561,39 @@ class ApiService {
     return data;
   }
 
+  static Future<Map<String, dynamic>> addPaymentMethod({
+    required String cardNumber,
+    required int expiryMonth,
+    required int expiryYear,
+    required String cvv,
+  }) async {
+    final url = Uri.parse('$baseUrl/payment-methods');
 
-static Future<Map<String, dynamic>> addPaymentMethod({
-  required String cardNumber,
-  required int expiryMonth,
-  required int expiryYear,
-  required String cvv,
-}) async {
-  final url = Uri.parse('$baseUrl/payment-methods');
-  
-  String? token = await StorageService.getToken(); 
+    String? token = await StorageService.getToken();
 
-  try {
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token', 
-      },
-      body: jsonEncode({
-        "type": "CREDIT_CARD",
-        "cardNumber": cardNumber,
-        "expiryMonth": expiryMonth,
-        "expiryYear": expiryYear,
-        "cvv": cvv,
-      }),
-    );
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          "type": "CREDIT_CARD",
+          "cardNumber": cardNumber,
+          "expiryMonth": expiryMonth,
+          "expiryYear": expiryYear,
+          "cvv": cvv,
+        }),
+      );
 
-    return jsonDecode(response.body);
-  } catch (e) {
-    return {"success": false, "message": "Connection Error"};
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"success": false, "message": "Connection Error"};
+    }
   }
-}
+
   static Future<Map<String, dynamic>> search({
     required String query,
     int page = 1,

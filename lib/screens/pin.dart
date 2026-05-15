@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/services/api_service.dart'; 
+import 'package:flutter_application_1/services/api_service.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class Pin extends StatefulWidget {
@@ -17,11 +17,7 @@ class _PinState extends State<Pin> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments;
 
-    final Map arguments = (args is Map) ? args : {};
-    final String phoneNumber = arguments['phone'] ?? "";
-    final String token = arguments['token'] ?? "";
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(centerTitle: true, title: Text("PiN")),
@@ -71,7 +67,7 @@ class _PinState extends State<Pin> {
                       ),
                       backgroundColor: const Color.fromARGB(255, 147, 24, 24),
                     ),
-                    onPressed: isLoading
+               onPressed: isLoading
     ? null
     : () async {
         if (codeController.text.length < 6) {
@@ -83,19 +79,21 @@ class _PinState extends State<Pin> {
           return;
         }
 
+        final args = ModalRoute.of(context)?.settings.arguments as Map?;
+        final String userId = args?["userId"] ?? "";
+
         setState(() => isLoading = true);
 
-        var response = await ApiService.verifyPhone(
+        var response = await ApiService.verifyLoginOtp(
           codeController.text,
-          token,
+          userId,
         );
 
         setState(() => isLoading = false);
 
-        print("✅ Verify Response: $response");
+        print("VERIFY RESPONSE: $response");
 
-        if (response['success'] == true) {
-          if (!mounted) return;
+        if (response["success"] == true) {
 
           Navigator.pushNamedAndRemoveUntil(
             context,
@@ -103,16 +101,11 @@ class _PinState extends State<Pin> {
             (route) => false,
           );
         } else {
-          
-          String msg =
-              response['error']?['message'] ?? "Verification Failed";
-
-          if (!mounted) return;
-
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(msg),
-              backgroundColor: Colors.red,
+              content: Text(
+                response["message"] ?? "Verification failed",
+              ),
             ),
           );
         }

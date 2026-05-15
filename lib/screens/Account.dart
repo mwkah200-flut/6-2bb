@@ -79,10 +79,16 @@ class _AccountState extends State<Account> {
                             "Add your credit & debit",
                           ),
                         ),
-                        _row(
-                          Icons.location_on,
-                          "Locations",
-                          "Add or remove your delivery locations",
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/locations");
+                            
+                          },
+                          child: _row(
+                            Icons.location_on,
+                            "Locations",
+                            "Add or remove your delivery locations",
+                          ),
                         ),
                         _row(
                           Icons.facebook,

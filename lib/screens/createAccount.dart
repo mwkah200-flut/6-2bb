@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/pin.dart';
 import 'package:flutter_application_1/services/api_service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -204,54 +205,42 @@ class _CreateaccountState extends State<Createaccount> {
                                         24,
                                       ),
                                     ),
-                                    onPressed: () async {
-                                      var regResponse =
-                                          await ApiService.register(
-                                            fullnameController.text,
-                                            emailController.text,
-                                            passwordController.text,
-                                            phoneController.text,
-                                          );
+                                   onPressed: () async {
+  var regResponse = await ApiService.register(
+    fullnameController.text,
+    emailController.text,
+    passwordController.text,
+    phoneController.text,
+  );
 
-                                      if (regResponse['success'] == true) {
-                                        print(
-                                          "✅ Signup Success! Navigating to Login...",
-                                        );
+  print("SIGNUP RESPONSE: $regResponse");
 
-                                        if (context.mounted) {
-                                          ScaffoldMessenger.of(
-                                            context,
-                                          ).showSnackBar(
-                                            const SnackBar(
-                                              content: Text(
-                                                "Account created successfully! Please login.",
-                                              ),
-                                              backgroundColor: Colors.green,
-                                            ),
-                                          );
+  if (regResponse['success'] == true) {
+    if (!context.mounted) return;
 
-                                          Navigator.pushReplacementNamed(
-                                            context,
-                                            "/login",
-                                          );
-                                        }
-                                      } else {
-                                        String errorMsg =
-                                            regResponse['error']?['message'] ??
-                                            "email must be an email,Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character, password must be longer than or equal to 8 characters";
-                                        if (context.mounted) {
-                                          ScaffoldMessenger.of(
-                                            context,
-                                          ).showSnackBar(
-                                            SnackBar(
-                                              content: Text(errorMsg),
-                                              backgroundColor: Colors.red,
-                                            ),
-                                          );
-                                        }
-                                      }
-                                    },
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Account created successfully! Please login."),
+        backgroundColor: Colors.green,
+      ),
+    );
 
+    // 🔥 مهم: روح login مباشرة
+    Navigator.pushReplacementNamed(context, "/login");
+  } else {
+    String errorMsg =
+        regResponse['error']?['message'] ?? "Signup failed";
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(errorMsg),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+},
+                             
+                             
                                     label: Text(
                                       "Sign up ",
                                       style: TextStyle(
@@ -272,10 +261,6 @@ class _CreateaccountState extends State<Createaccount> {
                                 ),
 
                                 SizedBox(height: 10),
-
-                      
-                              
-                              
                               ],
                             ),
                           ),
